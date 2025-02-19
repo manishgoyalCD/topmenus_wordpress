@@ -1,0 +1,10 @@
+phpserialize
+pymongo
+pytz
+pymysql
+requests
+python-magic
+paramiko
+python-dotenv
+pillow
+boto3
