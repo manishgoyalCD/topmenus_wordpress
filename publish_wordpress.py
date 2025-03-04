@@ -64,12 +64,12 @@ contabo_remote_path = (
     + "/"
 )
 
-ssh = paramiko.SSHClient()
-ssh.load_system_host_keys()
-ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-ssh.connect(WP_MYSQL_HOST, username="root")
-sftp = ssh.open_sftp()
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+# ssh = paramiko.SSHClient()
+# ssh.load_system_host_keys()
+# ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+# ssh.connect(WP_MYSQL_HOST, username="root")
+# sftp = ssh.open_sftp()
+# sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 # print("✅ Connected to server successfully!")
 
 logger = ErrorLogger(
