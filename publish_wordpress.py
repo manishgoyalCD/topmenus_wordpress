@@ -642,7 +642,7 @@ def insert_post(cursor, d, post_title, post_name, content, business_hours):
         meta_object["_lt_phone"] = d["phone_no"]
     if "website" in d and not (isinstance(d["website"], float)):
         meta_object["_lt_website"] = trim_url(d["website"])
-    meta_object["_lt_regions"] = 858
+    meta_object["_lt_regions"] =  35
     if business_hours != "":
         meta_object["_lt_hours_value"] = business_hours
     meta_object["_lt_map_latitude"] = str(d["lat"]) if d.__contains__("lat") else ""
@@ -743,7 +743,7 @@ def update_meta(cursor, d, post_id):
         meta_object["_lt_phone"] = d["phone_no"]
     if "website" in d and not (isinstance(d["website"], float)):
         meta_object["_lt_website"] = trim_url(d["website"])
-    meta_object["_lt_regions"] = 858
+    meta_object["_lt_regions"] =  35
 
     meta_object["_lt_map_latitude"] = str(d["lat"]) if d.__contains__("lat") else ""
     meta_object["_lt_map_longitude"] = str(d["long"]) if d.__contains__("long") else ""
