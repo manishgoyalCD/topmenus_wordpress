@@ -1,0 +1,2063 @@
+2025-02-19 Wednesday 18:34:36 INFO: --
+2025-02-19 Wednesday 18:34:36 INFO: Started at 2025-02-19T13:04:36.634460+00:00
+2025-02-19 Wednesday 18:34:41 INFO: Total 10 found
+2025-02-19 Wednesday 18:34:41 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 18:34:44 ERROR: error in main - Wok Xpress
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 189, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 495, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 18:34:46 INFO: Publishing restaurant - 676be38461a478d3ee8e40d2
+2025-02-19 Wednesday 18:35:55 INFO: --
+2025-02-19 Wednesday 18:35:55 INFO: Started at 2025-02-19T13:05:55.745957+00:00
+2025-02-19 Wednesday 18:35:58 INFO: Total 10 found
+2025-02-19 Wednesday 18:35:58 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 18:36:09 INFO: --
+2025-02-19 Wednesday 18:36:09 INFO: Started at 2025-02-19T13:06:09.225491+00:00
+2025-02-19 Wednesday 18:36:12 INFO: Total 10 found
+2025-02-19 Wednesday 18:36:12 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 18:36:15 ERROR: error in main - Wok Xpress
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 190, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 496, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 18:36:15 INFO: Publishing restaurant - 676be38461a478d3ee8e40d2
+2025-02-19 Wednesday 18:36:18 ERROR: error in main - Mi Familia Stephenville Restaurant
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 197, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 496, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 18:36:18 INFO: Publishing restaurant - 676be3641456a1843c67daa0
+2025-02-19 Wednesday 18:36:53 INFO: --
+2025-02-19 Wednesday 18:36:53 INFO: Started at 2025-02-19T13:06:53.859837+00:00
+2025-02-19 Wednesday 18:36:56 INFO: Total 10 found
+2025-02-19 Wednesday 18:36:56 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 18:36:57 ERROR: error in main - Wok Xpress
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 154, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ^^^^^^
+NameError: name 'cursor' is not defined
+2025-02-19 Wednesday 18:36:58 INFO: Publishing restaurant - 676be38461a478d3ee8e40d2
+2025-02-19 Wednesday 18:36:59 ERROR: error in main - Mi Familia Stephenville Restaurant
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 154, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ^^^^^^
+NameError: name 'cursor' is not defined
+2025-02-19 Wednesday 18:37:29 INFO: --
+2025-02-19 Wednesday 18:37:29 INFO: Started at 2025-02-19T13:07:29.734057+00:00
+2025-02-19 Wednesday 18:37:32 INFO: Total 10 found
+2025-02-19 Wednesday 18:37:32 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 18:37:35 ERROR: error in main - Wok Xpress
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 197, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 503, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 18:37:35 INFO: Publishing restaurant - 676be38461a478d3ee8e40d2
+2025-02-19 Wednesday 18:41:58 INFO: --
+2025-02-19 Wednesday 18:41:58 INFO: Started at 2025-02-19T13:11:58.272241+00:00
+2025-02-19 Wednesday 18:42:01 INFO: Total 10 found
+2025-02-19 Wednesday 18:42:01 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 18:42:08 ERROR: error in main - Wok Xpress
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 197, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 503, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 18:42:09 INFO: Publishing restaurant - 676be38461a478d3ee8e40d2
+2025-02-19 Wednesday 18:45:27 INFO: --
+2025-02-19 Wednesday 18:45:27 INFO: Started at 2025-02-19T13:15:27.833231+00:00
+2025-02-19 Wednesday 18:45:29 INFO: Total 1 found
+2025-02-19 Wednesday 18:45:29 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 18:45:33 ERROR: error in main - Wok Xpress
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 197, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 503, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 18:45:33 INFO: --
+2025-02-19 Wednesday 18:51:11 INFO: --
+2025-02-19 Wednesday 18:51:11 INFO: Started at 2025-02-19T13:21:11.591948+00:00
+2025-02-19 Wednesday 18:51:12 INFO: Total 1 found
+2025-02-19 Wednesday 18:51:12 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 18:51:15 ERROR: error in main - Wok Xpress
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 197, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 503, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 18:51:16 INFO: --
+2025-02-19 Wednesday 18:52:35 INFO: --
+2025-02-19 Wednesday 18:52:35 INFO: Started at 2025-02-19T13:22:35.283663+00:00
+2025-02-19 Wednesday 18:52:36 INFO: Total 1 found
+2025-02-19 Wednesday 18:52:36 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 18:52:39 ERROR: error in main - Wok Xpress
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 197, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 503, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 18:52:40 INFO: --
+2025-02-19 Wednesday 18:53:00 INFO: --
+2025-02-19 Wednesday 18:53:00 INFO: Started at 2025-02-19T13:23:00.663279+00:00
+2025-02-19 Wednesday 18:53:01 INFO: Total 1 found
+2025-02-19 Wednesday 18:53:01 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 18:53:04 ERROR: error in main - Wok Xpress
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 197, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 503, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 18:53:05 INFO: --
+2025-02-19 Wednesday 18:55:43 INFO: --
+2025-02-19 Wednesday 18:55:43 INFO: Started at 2025-02-19T13:25:43.408376+00:00
+2025-02-19 Wednesday 18:55:44 INFO: Total 1 found
+2025-02-19 Wednesday 18:55:44 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 18:55:48 ERROR: error in main - Wok Xpress
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 199, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 505, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 18:55:48 INFO: --
+2025-02-19 Wednesday 19:03:02 INFO: --
+2025-02-19 Wednesday 19:03:02 INFO: Started at 2025-02-19T13:33:02.102677+00:00
+2025-02-19 Wednesday 19:03:03 INFO: Total 1 found
+2025-02-19 Wednesday 19:03:03 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 19:03:06 ERROR: error in main - Wok Xpress
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 199, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 505, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 19:03:07 INFO: --
+2025-02-19 Wednesday 19:03:50 INFO: --
+2025-02-19 Wednesday 19:03:50 INFO: Started at 2025-02-19T13:33:50.119584+00:00
+2025-02-19 Wednesday 19:03:50 INFO: Total 1 found
+2025-02-19 Wednesday 19:03:50 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 19:03:54 ERROR: error in main - Wok Xpress
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 199, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 505, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 19:03:54 INFO: --
+2025-02-19 Wednesday 19:08:20 INFO: --
+2025-02-19 Wednesday 19:08:20 INFO: Started at 2025-02-19T13:38:20.849202+00:00
+2025-02-19 Wednesday 19:08:21 INFO: Total 1 found
+2025-02-19 Wednesday 19:08:21 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 19:08:26 ERROR: error in main - Wok Xpress
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 199, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 505, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 19:08:26 INFO: --
+2025-02-19 Wednesday 19:10:05 INFO: --
+2025-02-19 Wednesday 19:10:05 INFO: Started at 2025-02-19T13:40:05.693130+00:00
+2025-02-19 Wednesday 19:10:06 INFO: Total 1 found
+2025-02-19 Wednesday 19:10:06 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 19:10:09 ERROR: error in main - Wok Xpress
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 199, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 505, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 19:10:09 INFO: --
+2025-02-19 Wednesday 19:12:32 INFO: --
+2025-02-19 Wednesday 19:12:32 INFO: Started at 2025-02-19T13:42:32.900299+00:00
+2025-02-19 Wednesday 19:12:34 INFO: Total 1 found
+2025-02-19 Wednesday 19:12:34 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 19:12:37 ERROR: error in main - Wok Xpress
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 199, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 505, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 19:12:37 INFO: --
+2025-02-19 Wednesday 19:13:06 INFO: --
+2025-02-19 Wednesday 19:13:06 INFO: Started at 2025-02-19T13:43:06.252784+00:00
+2025-02-19 Wednesday 19:13:07 INFO: Total 1 found
+2025-02-19 Wednesday 19:13:07 INFO: Publishing restaurant - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 19:13:19 ERROR: Error in inserting tags
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 650, in insert_post
+    insert_tag_category(cursor, tag, tag_slug, last_insert_id, 'job_listing_tag')
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 808, in insert_tag_category
+    cursor.execute(sql3, (post_id, cat_db['term_id']))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1048, "Column 'object_id' cannot be null")
+2025-02-19 Wednesday 19:13:20 ERROR: Error in inserting tags
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 650, in insert_post
+    insert_tag_category(cursor, tag, tag_slug, last_insert_id, 'job_listing_tag')
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 808, in insert_tag_category
+    cursor.execute(sql3, (post_id, cat_db['term_id']))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1048, "Column 'object_id' cannot be null")
+2025-02-19 Wednesday 19:13:20 ERROR: Error in inserting tags
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 650, in insert_post
+    insert_tag_category(cursor, tag, tag_slug, last_insert_id, 'job_listing_tag')
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 808, in insert_tag_category
+    cursor.execute(sql3, (post_id, cat_db['term_id']))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1048, "Column 'object_id' cannot be null")
+2025-02-19 Wednesday 19:13:30 INFO: Error in featured image
+2025-02-19 Wednesday 19:13:31 INFO: Published successfully - 676be39d1456a1843c67daa4
+2025-02-19 Wednesday 19:13:31 INFO: --
+2025-02-19 Wednesday 19:32:28 INFO: --
+2025-02-19 Wednesday 19:32:28 INFO: Started at 2025-02-19T14:02:28.585307+00:00
+2025-02-19 Wednesday 19:32:29 INFO: Total 1 found
+2025-02-19 Wednesday 19:32:29 INFO: Publishing restaurant - 676be38461a478d3ee8e40d2
+2025-02-19 Wednesday 19:32:31 ERROR: error in main - Mi Familia Stephenville Restaurant
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 206, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 505, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 19:32:32 INFO: --
+2025-02-19 Wednesday 19:32:49 INFO: --
+2025-02-19 Wednesday 19:32:49 INFO: Started at 2025-02-19T14:02:49.141732+00:00
+2025-02-19 Wednesday 19:32:50 INFO: Total 1 found
+2025-02-19 Wednesday 19:32:50 INFO: Publishing restaurant - 676be38461a478d3ee8e40d2
+2025-02-19 Wednesday 19:32:52 ERROR: error in main - Mi Familia Stephenville Restaurant
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 206, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 505, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 19:32:53 INFO: --
+2025-02-19 Wednesday 19:33:17 INFO: --
+2025-02-19 Wednesday 19:33:17 INFO: Started at 2025-02-19T14:03:17.285455+00:00
+2025-02-19 Wednesday 19:33:18 INFO: Total 1 found
+2025-02-19 Wednesday 19:33:18 INFO: Publishing restaurant - 676be38461a478d3ee8e40d2
+2025-02-19 Wednesday 19:33:20 ERROR: error in main - Mi Familia Stephenville Restaurant
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 206, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 505, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 19:33:20 INFO: --
+2025-02-19 Wednesday 19:34:37 INFO: --
+2025-02-19 Wednesday 19:34:37 INFO: Started at 2025-02-19T14:04:37.357307+00:00
+2025-02-19 Wednesday 19:34:38 INFO: Total 1 found
+2025-02-19 Wednesday 19:34:38 INFO: Publishing restaurant - 676be38461a478d3ee8e40d2
+2025-02-19 Wednesday 19:34:40 INFO: Published successfully - 676be38461a478d3ee8e40d2
+2025-02-19 Wednesday 19:34:40 INFO: --
+2025-02-19 Wednesday 19:35:43 INFO: --
+2025-02-19 Wednesday 19:35:43 INFO: Started at 2025-02-19T14:05:43.022887+00:00
+2025-02-19 Wednesday 19:35:43 INFO: Total 1 found
+2025-02-19 Wednesday 19:35:43 INFO: Publishing restaurant - 676be3641456a1843c67daa0
+2025-02-19 Wednesday 19:35:53 ERROR: error in main - On The Border Mexican Grill & Cantina
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 199, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 505, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 19:35:53 INFO: --
+2025-02-19 Wednesday 19:36:50 INFO: --
+2025-02-19 Wednesday 19:36:50 INFO: Started at 2025-02-19T14:06:50.788500+00:00
+2025-02-19 Wednesday 19:36:51 INFO: Total 1 found
+2025-02-19 Wednesday 19:36:51 INFO: Publishing restaurant - 676be3641456a1843c67daa0
+2025-02-19 Wednesday 19:36:56 ERROR: error in main - On The Border Mexican Grill & Cantina
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 199, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 506, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 19:36:56 INFO: --
+2025-02-19 Wednesday 19:40:53 INFO: --
+2025-02-19 Wednesday 19:40:53 INFO: Started at 2025-02-19T14:10:53.303918+00:00
+2025-02-19 Wednesday 19:40:54 INFO: Total 1 found
+2025-02-19 Wednesday 19:40:54 INFO: Publishing restaurant - 676be3641456a1843c67daa0
+2025-02-19 Wednesday 19:40:58 ERROR: error in main - On The Border Mexican Grill & Cantina
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 199, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 506, in insert_post
+    print("Executing SQL:", cursor.mogrify(insert_sql, (post_author, post_date, post_date.astimezone(pytz.UTC), content, post_title, post_status, ping_status, post_name, post_date, post_date.astimezone(pytz.UTC), post_parent, post_type)))
+                                                                                ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'astimezone'
+2025-02-19 Wednesday 19:40:58 INFO: --
+2025-02-19 Wednesday 19:42:09 INFO: --
+2025-02-19 Wednesday 19:42:09 INFO: Started at 2025-02-19T14:12:09.512700+00:00
+2025-02-19 Wednesday 19:42:10 INFO: Total 1 found
+2025-02-19 Wednesday 19:42:10 INFO: Publishing restaurant - 676be3641456a1843c67daa0
+2025-02-19 Wednesday 19:42:15 ERROR: error in main - On The Border Mexican Grill & Cantina
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 199, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 506, in insert_post
+    print("Executing SQL:", insert_sql % (post_author, post_date, post_date.astimezone(pytz.UTC), content, post_title, post_status, ping_status, post_name, post_date, post_date.astimezone(pytz.UTC), post_parent, post_type))
+                                                                  ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'astimezone'
+2025-02-19 Wednesday 19:42:15 INFO: --
+2025-02-19 Wednesday 19:42:30 INFO: --
+2025-02-19 Wednesday 19:42:30 INFO: Started at 2025-02-19T14:12:30.368057+00:00
+2025-02-19 Wednesday 19:42:31 INFO: Total 1 found
+2025-02-19 Wednesday 19:42:31 INFO: Publishing restaurant - 676be3641456a1843c67daa0
+2025-02-19 Wednesday 19:42:35 ERROR: error in main - On The Border Mexican Grill & Cantina
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 199, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 506, in insert_post
+    print("Executing SQL:", cursor.mogrify(insert_sql, (post_author, post_date, post_date.astimezone(pytz.UTC), content, post_title, post_status, ping_status, post_name, post_date, post_date.astimezone(pytz.UTC), post_parent, post_type)))
+                                                                                ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'astimezone'
+2025-02-19 Wednesday 19:42:35 INFO: --
+2025-02-19 Wednesday 19:44:04 INFO: --
+2025-02-19 Wednesday 19:44:04 INFO: Started at 2025-02-19T14:14:04.945761+00:00
+2025-02-19 Wednesday 19:44:05 INFO: Total 1 found
+2025-02-19 Wednesday 19:44:05 INFO: Publishing restaurant - 676be3641456a1843c67daa0
+2025-02-19 Wednesday 19:44:10 ERROR: error in main - On The Border Mexican Grill & Cantina
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 199, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 507, in insert_post
+    print("Executing SQL:", cursor.mogrify(insert_sql, (post_author, post_date, post_date.astimezone(pytz.UTC), content, post_title, post_status, ping_status, post_name, post_date, post_date.astimezone(pytz.UTC), post_parent, post_type)))
+                                                                                ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'astimezone'
+2025-02-19 Wednesday 19:44:10 INFO: --
+2025-02-19 Wednesday 19:44:35 INFO: --
+2025-02-19 Wednesday 19:44:35 INFO: Started at 2025-02-19T14:14:35.401094+00:00
+2025-02-19 Wednesday 19:44:36 INFO: Total 1 found
+2025-02-19 Wednesday 19:44:36 INFO: Publishing restaurant - 676be3641456a1843c67daa0
+2025-02-19 Wednesday 19:44:46 ERROR: error in main - On The Border Mexican Grill & Cantina
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 199, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 507, in insert_post
+    print("Executing SQL:", cursor.mogrify(insert_sql, (post_author, post_date, post_date.astimezone(pytz.UTC), content, post_title, post_status, ping_status, post_name, post_date, post_date.astimezone(pytz.UTC), post_parent, post_type)))
+                                                                                ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'astimezone'
+2025-02-19 Wednesday 19:44:46 INFO: --
+2025-02-19 Wednesday 19:45:29 INFO: --
+2025-02-19 Wednesday 19:45:29 INFO: Started at 2025-02-19T14:15:29.301190+00:00
+2025-02-19 Wednesday 19:45:29 INFO: Total 1 found
+2025-02-19 Wednesday 19:45:29 INFO: Publishing restaurant - 676be3641456a1843c67daa0
+2025-02-19 Wednesday 19:45:34 ERROR: error in main - On The Border Mexican Grill & Cantina
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 199, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 511, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 19:45:34 INFO: --
+2025-02-19 Wednesday 19:46:04 INFO: --
+2025-02-19 Wednesday 19:46:04 INFO: Started at 2025-02-19T14:16:04.338479+00:00
+2025-02-19 Wednesday 19:46:05 INFO: Total 1 found
+2025-02-19 Wednesday 19:46:05 INFO: Publishing restaurant - 676be3641456a1843c67daa0
+2025-02-19 Wednesday 19:46:10 ERROR: error in main - On The Border Mexican Grill & Cantina
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 199, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 511, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 19:46:10 INFO: --
+2025-02-19 Wednesday 19:47:40 INFO: --
+2025-02-19 Wednesday 19:47:40 INFO: Started at 2025-02-19T14:17:40.345205+00:00
+2025-02-19 Wednesday 19:47:41 INFO: Total 1 found
+2025-02-19 Wednesday 19:47:41 INFO: Publishing restaurant - 676be2251456a1843c67da82
+2025-02-19 Wednesday 19:47:44 ERROR: error in main - Ocha FTW Thai Cuisine
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 206, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 511, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date, content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 19:47:44 INFO: --
+2025-02-19 Wednesday 19:49:24 INFO: --
+2025-02-19 Wednesday 19:49:24 INFO: Started at 2025-02-19T14:19:24.562849+00:00
+2025-02-19 Wednesday 19:49:25 INFO: Total 1 found
+2025-02-19 Wednesday 19:49:25 INFO: Publishing restaurant - 676be2251456a1843c67da82
+2025-02-19 Wednesday 19:49:28 ERROR: error in main - Ocha FTW Thai Cuisine
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 206, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 511, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date.astimezone(pytz.UTC), content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 19:49:28 INFO: --
+2025-02-19 Wednesday 19:51:12 INFO: --
+2025-02-19 Wednesday 19:51:12 INFO: Started at 2025-02-19T14:21:12.729502+00:00
+2025-02-19 Wednesday 19:51:13 INFO: Total 1 found
+2025-02-19 Wednesday 19:51:13 INFO: Publishing restaurant - 676be2251456a1843c67da82
+2025-02-19 Wednesday 19:51:16 ERROR: error in main - Ocha FTW Thai Cuisine
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 206, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 514, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date.astimezone(pytz.UTC), content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_excerpt' doesn't have a default value")
+2025-02-19 Wednesday 19:51:16 INFO: --
+2025-02-19 Wednesday 19:54:48 INFO: --
+2025-02-19 Wednesday 19:54:48 INFO: Started at 2025-02-19T14:24:48.161344+00:00
+2025-02-19 Wednesday 19:54:49 INFO: Total 1 found
+2025-02-19 Wednesday 19:54:49 INFO: Publishing restaurant - 676be2251456a1843c67da82
+2025-02-19 Wednesday 19:54:52 ERROR: error in main - Ocha FTW Thai Cuisine
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 206, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 514, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date.astimezone(pytz.UTC), content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'to_ping' doesn't have a default value")
+2025-02-19 Wednesday 19:54:52 INFO: --
+2025-02-19 Wednesday 19:55:56 INFO: --
+2025-02-19 Wednesday 19:55:56 INFO: Started at 2025-02-19T14:25:56.834328+00:00
+2025-02-19 Wednesday 19:55:57 INFO: Total 1 found
+2025-02-19 Wednesday 19:55:57 INFO: Publishing restaurant - 676be2251456a1843c67da82
+2025-02-19 Wednesday 19:56:01 ERROR: error in main - Ocha FTW Thai Cuisine
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 206, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 514, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date.astimezone(pytz.UTC), content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'pinged' doesn't have a default value")
+2025-02-19 Wednesday 19:56:01 INFO: --
+2025-02-19 Wednesday 19:56:59 INFO: --
+2025-02-19 Wednesday 19:56:59 INFO: Started at 2025-02-19T14:26:59.492348+00:00
+2025-02-19 Wednesday 19:57:00 INFO: Total 1 found
+2025-02-19 Wednesday 19:57:00 INFO: Publishing restaurant - 676be2251456a1843c67da82
+2025-02-19 Wednesday 19:57:03 ERROR: error in main - Ocha FTW Thai Cuisine
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 206, in process_data
+    last_insert_id = insert_post(cursor, d, post_title, post_name, content, business_hours)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 514, in insert_post
+    res = cursor.execute(insert_sql, (post_author, post_date, post_date.astimezone(pytz.UTC), content, post_title, post_status, ping_status, post_name, post_date, post_date, post_parent, post_type))
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+    ~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1364, "Field 'post_content_filtered' doesn't have a default value")
+2025-02-19 Wednesday 19:57:03 INFO: --
+2025-02-19 Wednesday 19:57:29 INFO: --
+2025-02-19 Wednesday 19:57:29 INFO: Started at 2025-02-19T14:27:29.425322+00:00
+2025-02-19 Wednesday 19:57:30 INFO: Total 1 found
+2025-02-19 Wednesday 19:57:30 INFO: Publishing restaurant - 676be2251456a1843c67da82
+2025-02-19 Wednesday 19:57:48 INFO: Error in featured image - (1364, "Field 'to_ping' doesn't have a default value")
+2025-02-19 Wednesday 19:57:49 INFO: Published successfully - 676be2251456a1843c67da82
+2025-02-19 Wednesday 19:57:49 INFO: --
+2025-02-19 Wednesday 19:58:32 INFO: --
+2025-02-19 Wednesday 19:58:32 INFO: Started at 2025-02-19T14:28:32.977326+00:00
+2025-02-19 Wednesday 19:58:33 INFO: Total 1 found
+2025-02-19 Wednesday 19:58:33 INFO: Publishing restaurant - 676be1a9eb158b1f5ff00ac3
+2025-02-19 Wednesday 19:58:51 INFO: Error in featured image - (1364, "Field 'pinged' doesn't have a default value")
+2025-02-19 Wednesday 19:58:51 INFO: Published successfully - 676be1a9eb158b1f5ff00ac3
+2025-02-19 Wednesday 19:58:51 INFO: --
+2025-02-19 Wednesday 20:00:18 INFO: --
+2025-02-19 Wednesday 20:00:18 INFO: Started at 2025-02-19T14:30:18.028619+00:00
+2025-02-19 Wednesday 20:00:18 INFO: Total 1 found
+2025-02-19 Wednesday 20:00:18 INFO: Publishing restaurant - 676be3641456a1843c67daa0
+2025-02-19 Wednesday 20:01:07 INFO: Error in featured image
+2025-02-19 Wednesday 20:01:08 INFO: Published successfully - 676be3641456a1843c67daa0
+2025-02-19 Wednesday 20:01:08 INFO: --
+2025-02-19 Wednesday 20:03:59 INFO: --
+2025-02-19 Wednesday 20:03:59 INFO: Started at 2025-02-19T14:33:59.883190+00:00
+2025-02-19 Wednesday 20:04:00 INFO: Total 1 found
+2025-02-19 Wednesday 20:04:00 INFO: Publishing restaurant - 676be332cdefea7333dc8688
+2025-02-19 Wednesday 20:04:50 INFO: Error in featured image
+2025-02-19 Wednesday 20:04:51 INFO: Published successfully - 676be332cdefea7333dc8688
+2025-02-19 Wednesday 20:04:51 INFO: --
+2025-02-19 Wednesday 20:06:05 INFO: --
+2025-02-19 Wednesday 20:06:05 INFO: Started at 2025-02-19T14:36:05.714069+00:00
+2025-02-19 Wednesday 20:06:06 INFO: Total 1 found
+2025-02-19 Wednesday 20:06:06 INFO: Publishing restaurant - 676be32f1456a1843c67da99
+2025-02-19 Wednesday 20:06:50 INFO: Error in featured image - (1364, "Field 'post_content_filtered' doesn't have a default value")
+2025-02-19 Wednesday 20:06:51 INFO: Published successfully - 676be32f1456a1843c67da99
+2025-02-19 Wednesday 20:06:51 INFO: --
+2025-02-19 Wednesday 20:07:18 INFO: --
+2025-02-19 Wednesday 20:07:18 INFO: Started at 2025-02-19T14:37:18.232173+00:00
+2025-02-19 Wednesday 20:07:19 INFO: Total 1 found
+2025-02-19 Wednesday 20:07:19 INFO: Publishing restaurant - 676be31f61a478d3ee8e40ce
+2025-02-19 Wednesday 20:07:38 INFO: Published successfully - 676be31f61a478d3ee8e40ce
+2025-02-19 Wednesday 20:07:38 INFO: --
+2025-02-19 Wednesday 20:08:22 INFO: --
+2025-02-19 Wednesday 20:08:22 INFO: Started at 2025-02-19T14:38:22.173007+00:00
+2025-02-19 Wednesday 20:08:22 INFO: Total 1 found
+2025-02-19 Wednesday 20:08:22 INFO: Publishing restaurant - 676be2cb1456a1843c67da95
+2025-02-19 Wednesday 20:08:40 INFO: Published successfully - 676be2cb1456a1843c67da95
+2025-02-19 Wednesday 20:08:40 INFO: --
+2025-02-19 Wednesday 20:09:44 INFO: --
+2025-02-19 Wednesday 20:09:44 INFO: Started at 2025-02-19T14:39:44.508536+00:00
+2025-02-19 Wednesday 20:09:45 INFO: Total 1 found
+2025-02-19 Wednesday 20:09:45 INFO: Publishing restaurant - 676be2a3eb158b1f5ff00ac7
+2025-02-19 Wednesday 20:10:19 INFO: Published successfully - 676be2a3eb158b1f5ff00ac7
+2025-02-19 Wednesday 20:10:19 INFO: --
+2025-02-19 Wednesday 20:10:30 INFO: --
+2025-02-19 Wednesday 20:10:30 INFO: Started at 2025-02-19T14:40:30.409832+00:00
+2025-02-19 Wednesday 20:10:32 INFO: Total 50 found
+2025-02-19 Wednesday 20:10:32 INFO: Publishing restaurant - 676be2931456a1843c67da8f
+2025-02-19 Wednesday 20:11:04 INFO: Published successfully - 676be2931456a1843c67da8f
+2025-02-19 Wednesday 20:11:04 INFO: Publishing restaurant - 676be26f61a478d3ee8e40ca
+2025-02-19 Wednesday 20:11:29 INFO: Published successfully - 676be26f61a478d3ee8e40ca
+2025-02-19 Wednesday 20:11:29 INFO: Publishing restaurant - 676be26c1456a1843c67da8a
+2025-02-19 Wednesday 20:11:56 INFO: Published successfully - 676be26c1456a1843c67da8a
+2025-02-19 Wednesday 20:11:56 INFO: Publishing restaurant - 676be23c1456a1843c67da86
+2025-02-19 Wednesday 20:12:15 INFO: Published successfully - 676be23c1456a1843c67da86
+2025-02-19 Wednesday 20:12:15 INFO: Publishing restaurant - 676be1a51456a1843c67da7e
+2025-02-19 Wednesday 20:12:38 INFO: Published successfully - 676be1a51456a1843c67da7e
+2025-02-19 Wednesday 20:12:38 INFO: Publishing restaurant - 676be18b1456a1843c67da79
+2025-02-19 Wednesday 20:13:09 INFO: Published successfully - 676be18b1456a1843c67da79
+2025-02-19 Wednesday 20:13:09 INFO: Publishing restaurant - 676be16b1456a1843c67da74
+2025-02-19 Wednesday 20:13:50 INFO: Published successfully - 676be16b1456a1843c67da74
+2025-02-19 Wednesday 20:13:50 INFO: Publishing restaurant - 676be1551456a1843c67da6f
+2025-02-19 Wednesday 20:14:19 INFO: Published successfully - 676be1551456a1843c67da6f
+2025-02-19 Wednesday 20:14:19 INFO: Publishing restaurant - 676be14eeb158b1f5ff00abe
+2025-02-19 Wednesday 20:14:38 INFO: Published successfully - 676be14eeb158b1f5ff00abe
+2025-02-19 Wednesday 20:14:38 INFO: Publishing restaurant - 676be104cdefea7333dc8684
+2025-02-19 Wednesday 20:14:59 INFO: Published successfully - 676be104cdefea7333dc8684
+2025-02-19 Wednesday 20:14:59 INFO: Publishing restaurant - 676be1001456a1843c67da6b
+2025-02-19 Wednesday 20:15:18 INFO: Published successfully - 676be1001456a1843c67da6b
+2025-02-19 Wednesday 20:15:18 INFO: Publishing restaurant - 676be0d11456a1843c67da67
+2025-02-19 Wednesday 20:16:00 INFO: Published successfully - 676be0d11456a1843c67da67
+2025-02-19 Wednesday 20:16:00 INFO: Publishing restaurant - 676be0b4eb158b1f5ff00aba
+2025-02-19 Wednesday 20:16:31 INFO: Published successfully - 676be0b4eb158b1f5ff00aba
+2025-02-19 Wednesday 20:16:31 INFO: Publishing restaurant - 676be09ceb158b1f5ff00ab5
+2025-02-19 Wednesday 20:16:53 INFO: Published successfully - 676be09ceb158b1f5ff00ab5
+2025-02-19 Wednesday 20:16:53 INFO: Publishing restaurant - 676be073eb158b1f5ff00ab1
+2025-02-19 Wednesday 20:17:10 INFO: Published successfully - 676be073eb158b1f5ff00ab1
+2025-02-19 Wednesday 20:17:10 INFO: Publishing restaurant - 676be03061a478d3ee8e40c6
+2025-02-19 Wednesday 20:17:43 INFO: Published successfully - 676be03061a478d3ee8e40c6
+2025-02-19 Wednesday 20:17:43 INFO: Publishing restaurant - 676be0181456a1843c67da63
+2025-02-19 Wednesday 20:18:18 INFO: Published successfully - 676be0181456a1843c67da63
+2025-02-19 Wednesday 20:18:18 INFO: Publishing restaurant - 676bdfd01456a1843c67da5f
+2025-02-19 Wednesday 20:19:09 INFO: Published successfully - 676bdfd01456a1843c67da5f
+2025-02-19 Wednesday 20:19:09 INFO: Publishing restaurant - 676bdfb561a478d3ee8e40c1
+2025-02-19 Wednesday 20:19:36 INFO: Published successfully - 676bdfb561a478d3ee8e40c1
+2025-02-19 Wednesday 20:19:36 INFO: Publishing restaurant - 676bdf791456a1843c67da5b
+2025-02-19 Wednesday 20:20:48 INFO: Published successfully - 676bdf791456a1843c67da5b
+2025-02-19 Wednesday 20:20:48 INFO: Publishing restaurant - 676bdf561456a1843c67da57
+2025-02-19 Wednesday 20:21:36 INFO: Published successfully - 676bdf561456a1843c67da57
+2025-02-19 Wednesday 20:21:36 INFO: Publishing restaurant - 676bdec31456a1843c67da53
+2025-02-19 Wednesday 20:22:01 INFO: Published successfully - 676bdec31456a1843c67da53
+2025-02-19 Wednesday 20:22:01 INFO: Publishing restaurant - 676bde381456a1843c67da4f
+2025-02-19 Wednesday 20:22:11 INFO: Published successfully - 676bde381456a1843c67da4f
+2025-02-19 Wednesday 20:22:11 INFO: Publishing restaurant - 676bde271456a1843c67da4b
+2025-02-19 Wednesday 20:22:31 INFO: Published successfully - 676bde271456a1843c67da4b
+2025-02-19 Wednesday 20:22:31 INFO: Publishing restaurant - 676bde0a61a478d3ee8e40bd
+2025-02-19 Wednesday 20:22:52 INFO: Published successfully - 676bde0a61a478d3ee8e40bd
+2025-02-19 Wednesday 20:22:52 INFO: Publishing restaurant - 676bddebcdefea7333dc867f
+2025-02-19 Wednesday 20:23:21 INFO: Published successfully - 676bddebcdefea7333dc867f
+2025-02-19 Wednesday 20:23:21 INFO: Publishing restaurant - 676bddd461a478d3ee8e40b9
+2025-02-19 Wednesday 20:24:07 INFO: Published successfully - 676bddd461a478d3ee8e40b9
+2025-02-19 Wednesday 20:24:07 INFO: Publishing restaurant - 676bdd72cdefea7333dc867b
+2025-02-19 Wednesday 22:18:57 INFO: --
+2025-02-19 Wednesday 22:18:57 INFO: Started at 2025-02-19T16:48:57.176921+00:00
+2025-02-19 Wednesday 22:20:38 INFO: --
+2025-02-19 Wednesday 22:20:38 INFO: Started at 2025-02-19T16:50:38.534156+00:00
+2025-02-19 Wednesday 22:21:53 INFO: --
+2025-02-19 Wednesday 22:21:53 INFO: Started at 2025-02-19T16:51:53.880415+00:00
+2025-02-19 Wednesday 22:22:33 INFO: --
+2025-02-19 Wednesday 22:22:33 INFO: Started at 2025-02-19T16:52:33.229111+00:00
+2025-02-19 Wednesday 22:25:10 INFO: --
+2025-02-19 Wednesday 22:25:10 INFO: Started at 2025-02-19T16:55:10.877224+00:00
+2025-02-19 Wednesday 22:27:11 INFO: Total 100 found
+2025-02-19 Wednesday 22:27:11 INFO: Publishing restaurant - 676bdd72cdefea7333dc867b
+2025-02-19 Wednesday 22:28:05 INFO: Published successfully - 676bdd72cdefea7333dc867b
+2025-02-19 Wednesday 22:28:05 INFO: Publishing restaurant - 676bdd4761a478d3ee8e40b5
+2025-02-19 Wednesday 22:28:05 ERROR: error in main - Los Nares
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:05 INFO: Publishing restaurant - 676bdd311456a1843c67da46
+2025-02-19 Wednesday 22:28:05 ERROR: error in main - Breakfast Club 51 Fort Worth
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:05 INFO: Publishing restaurant - 676bdce3eb158b1f5ff00aad
+2025-02-19 Wednesday 22:28:05 ERROR: error in main - Barley & Board
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:06 INFO: Publishing restaurant - 676bdc8a61a478d3ee8e40b0
+2025-02-19 Wednesday 22:28:06 ERROR: error in main - Golden Chick
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:06 INFO: Publishing restaurant - 676bdc7961a478d3ee8e40ab
+2025-02-19 Wednesday 22:28:06 ERROR: error in main - Hams Bistro & Coffee
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:06 INFO: Publishing restaurant - 676bdc37cdefea7333dc8677
+2025-02-19 Wednesday 22:28:06 ERROR: error in main - Whataburger
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:07 INFO: Publishing restaurant - 676bdbd31456a1843c67da42
+2025-02-19 Wednesday 22:28:07 ERROR: error in main - Blue Mound Cafe - Saginaw
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:08 INFO: Publishing restaurant - 676bdbaa61a478d3ee8e40a7
+2025-02-19 Wednesday 22:28:08 ERROR: error in main - Charleys Cheesesteaks and Wings
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:08 INFO: Publishing restaurant - 676bdba4cdefea7333dc8673
+2025-02-19 Wednesday 22:28:08 ERROR: error in main - Mi Rancho Humble
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:08 INFO: Publishing restaurant - 676bdb9561a478d3ee8e40a3
+2025-02-19 Wednesday 22:28:08 ERROR: error in main - Fuego Mexican Food
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:08 INFO: Publishing restaurant - 676bdb6161a478d3ee8e409f
+2025-02-19 Wednesday 22:28:08 ERROR: error in main - Ida V’s Smoke Palace
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:09 INFO: Publishing restaurant - 676bdb2d61a478d3ee8e409b
+2025-02-19 Wednesday 22:28:09 ERROR: error in main - BAKED! Bread & Pastry Co
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:10 INFO: Publishing restaurant - 676bdb1e1456a1843c67da3e
+2025-02-19 Wednesday 22:28:10 ERROR: error in main - Big Joe's Pizza
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:10 INFO: Publishing restaurant - 676bda9a1456a1843c67da3a
+2025-02-19 Wednesday 22:28:10 ERROR: error in main - H3 Ranch
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:10 INFO: Publishing restaurant - 676bda4a61a478d3ee8e4097
+2025-02-19 Wednesday 22:28:10 ERROR: error in main - Josefina’s Tamales
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:11 INFO: Publishing restaurant - 676bda3261a478d3ee8e4093
+2025-02-19 Wednesday 22:28:11 ERROR: error in main - Javi tacos
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:11 INFO: Publishing restaurant - 676bda1161a478d3ee8e408f
+2025-02-19 Wednesday 22:28:11 ERROR: error in main - Granbury Nutrition
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:12 INFO: Publishing restaurant - 676bda06cdefea7333dc866d
+2025-02-19 Wednesday 22:28:12 ERROR: error in main - Chick Houz
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:12 INFO: Publishing restaurant - 676bd9d761a478d3ee8e408b
+2025-02-19 Wednesday 22:28:12 ERROR: error in main - Vito’s Italian Kitchen
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:12 INFO: Publishing restaurant - 676bd98bcdefea7333dc8666
+2025-02-19 Wednesday 22:28:12 ERROR: error in main - 3D’s Krazy Kitchen Bar and Lounge
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:13 INFO: Publishing restaurant - 676bd97561a478d3ee8e4087
+2025-02-19 Wednesday 22:28:13 ERROR: error in main - Tropical Breeze Nutrition Club
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:13 INFO: Publishing restaurant - 676bd96bcdefea7333dc8662
+2025-02-19 Wednesday 22:28:13 ERROR: error in main - Bamboo House
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:14 INFO: Publishing restaurant - 676bd8f261a478d3ee8e4083
+2025-02-19 Wednesday 22:28:14 ERROR: error in main - Schlotzsky's
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:14 INFO: Publishing restaurant - 676bd8c661a478d3ee8e407c
+2025-02-19 Wednesday 22:28:14 ERROR: error in main - Cotton Patch Cafe
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:14 INFO: Publishing restaurant - 676bd88761a478d3ee8e4078
+2025-02-19 Wednesday 22:28:14 ERROR: error in main - Firehouse Cafe
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:15 INFO: Publishing restaurant - 676bd885eb158b1f5ff00aa8
+2025-02-19 Wednesday 22:28:15 ERROR: error in main - Chestnut Tree Bistro
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:15 INFO: Publishing restaurant - 676bd8401456a1843c67da36
+2025-02-19 Wednesday 22:28:15 ERROR: error in main - Joe T. Garcia's
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:15 INFO: Publishing restaurant - 676bd7d01456a1843c67da32
+2025-02-19 Wednesday 22:28:15 ERROR: error in main - Cardona Foods
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:16 INFO: Publishing restaurant - 676bd729eb158b1f5ff00aa4
+2025-02-19 Wednesday 22:28:16 ERROR: error in main - The Loophole Funky Fresh Food & Booze
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:17 INFO: Publishing restaurant - 676bd704eb158b1f5ff00aa0
+2025-02-19 Wednesday 22:28:17 ERROR: error in main - Dusty's Bar & Grill
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:17 INFO: Publishing restaurant - 676bd74b1456a1843c67da2e
+2025-02-19 Wednesday 22:28:17 ERROR: error in main - Saltgrass Steak House
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:17 INFO: Publishing restaurant - 676bd65feb158b1f5ff00a9c
+2025-02-19 Wednesday 22:28:17 ERROR: error in main - Thai Square
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:19 INFO: Publishing restaurant - 676bd62f61a478d3ee8e4074
+2025-02-19 Wednesday 22:28:19 ERROR: error in main - Asian Grill
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:19 INFO: Publishing restaurant - 676bd62d1456a1843c67da2a
+2025-02-19 Wednesday 22:28:19 ERROR: error in main - Chili's Grill & Bar
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:19 INFO: Publishing restaurant - 676bd5daeb158b1f5ff00a98
+2025-02-19 Wednesday 22:28:19 ERROR: error in main - Game Changers Sports & Arcade Grill
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:19 INFO: Publishing restaurant - 676bd54061a478d3ee8e4070
+2025-02-19 Wednesday 22:28:19 ERROR: error in main - Flavor on 51
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:20 INFO: Publishing restaurant - 676bd5341456a1843c67da24
+2025-02-19 Wednesday 22:28:20 ERROR: error in main - Lucky Wok Asian Cafe
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:20 INFO: Publishing restaurant - 676bd4b761a478d3ee8e406b
+2025-02-19 Wednesday 22:28:20 ERROR: error in main - Over the Top Bar and Grill
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:20 INFO: Publishing restaurant - 676bd4b7cdefea7333dc865e
+2025-02-19 Wednesday 22:28:20 ERROR: error in main - R&B Soul Food & Cajun Kitchen
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:21 INFO: Publishing restaurant - 676bd4b51456a1843c67da20
+2025-02-19 Wednesday 22:28:21 ERROR: error in main - The Kitchen Trap Fort Worth
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:21 INFO: Publishing restaurant - 676bd4a11456a1843c67da1c
+2025-02-19 Wednesday 22:28:21 ERROR: error in main - Taqueria el Michoacano
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:21 INFO: Publishing restaurant - 676bd49961a478d3ee8e4064
+2025-02-19 Wednesday 22:28:21 ERROR: error in main - Trinity Street Restaurant and Bar
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:22 INFO: Publishing restaurant - 676bd47c1456a1843c67da18
+2025-02-19 Wednesday 22:28:22 ERROR: error in main - Texas Made BBQ
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:22 INFO: Publishing restaurant - 676bd4601456a1843c67da12
+2025-02-19 Wednesday 22:28:22 ERROR: error in main - Juan's Burrito Express
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:22 INFO: Publishing restaurant - 676bd425cdefea7333dc865a
+2025-02-19 Wednesday 22:28:22 ERROR: error in main - The Toasted Yolk Cafe
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:22 INFO: Publishing restaurant - 676bd3d81456a1843c67da0e
+2025-02-19 Wednesday 22:28:22 ERROR: error in main - Rice Xpress
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:24 INFO: Publishing restaurant - 676bd3d461a478d3ee8e4060
+2025-02-19 Wednesday 22:28:24 ERROR: error in main - Subway
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:28:24 INFO: Publishing restaurant - 676bd3af61a478d3ee8e405c
+2025-02-19 Wednesday 22:28:24 ERROR: error in main - Ritzy B's Smokehouse & Grill
+Traceback (most recent call last):
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/old_publish_wordpress.py", line 170, in process_data
+    cursor.execute(check_sql, (check_with_quote, check_without_quote))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+    ~~~~~~~~~~^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/manish/publishing-onemenus-15-jan/wordpress/venv/lib/python3.13/site-packages/pymysql/connections.py", line 843, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+2025-02-19 Wednesday 22:29:03 INFO: --
+2025-02-19 Wednesday 22:29:03 INFO: Started at 2025-02-19T16:59:03.984528+00:00
+2025-02-19 Wednesday 22:31:10 INFO: Total 100 found
+2025-02-19 Wednesday 22:31:10 INFO: Publishing restaurant - 676bdd4761a478d3ee8e40b5
+2025-02-19 Wednesday 22:31:34 INFO: Published successfully - 676bdd4761a478d3ee8e40b5
+2025-02-19 Wednesday 22:31:34 INFO: Publishing restaurant - 676bdd311456a1843c67da46
+2025-02-19 Wednesday 22:32:29 INFO: Published successfully - 676bdd311456a1843c67da46
+2025-02-19 Wednesday 22:32:29 INFO: Publishing restaurant - 676bdce3eb158b1f5ff00aad
+2025-02-19 Wednesday 22:32:51 INFO: Published successfully - 676bdce3eb158b1f5ff00aad
+2025-02-19 Wednesday 22:32:51 INFO: Publishing restaurant - 676bdc8a61a478d3ee8e40b0
+2025-02-19 Wednesday 22:37:40 INFO: Published successfully - 676bdc8a61a478d3ee8e40b0
+2025-02-19 Wednesday 22:37:40 INFO: Publishing restaurant - 676bdc7961a478d3ee8e40ab
+2025-02-19 Wednesday 22:38:15 INFO: Published successfully - 676bdc7961a478d3ee8e40ab
+2025-02-19 Wednesday 22:38:15 INFO: Publishing restaurant - 676bdc37cdefea7333dc8677

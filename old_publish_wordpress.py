@@ -43,6 +43,7 @@ from datetime import timedelta, datetime
 from urllib.parse import urlparse
 from PIL import Image
 from io import BytesIO
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from constant import *
 from dotenv import load_dotenv
@@ -50,7 +51,6 @@ from logger import ErrorLogger
 import shutil
 from os import getenv
 import hashlib
-from utils import *
 
 load_dotenv(override=True)
 slugSet = set()
@@ -62,16 +62,13 @@ WP_MYSQL_PASS = getenv("WP_MYSQL_PASS")
 WP_MYSQL_DB = getenv("WP_MYSQL_DB")
 WP_MYSQL_PORT = getenv("WP_MYSQL_PORT")
 ONE_MENUS_PRODUCT = getenv("ONE_MENUS_PRODUCT")
-GOOGLE_MAPS_DB_URI = getenv("GOOGLE_MAPS_DB_URI")
 contabo_host = getenv("WP_HOST")
 contabo_port = getenv("WP_PORT")
 contabo_username = getenv("WP_USER")
 contabo_password = getenv("WP_PASS")
 
-ds_conn = pymongo.MongoClient(ONE_MENUS_PRODUCT)
-ds_db = ds_conn["topmenus_product"]
-dev_conn = pymongo.MongoClient(GOOGLE_MAPS_DB_URI)
-dev_db = dev_conn["topmenus_crawling"]
+conn = pymongo.MongoClient(ONE_MENUS_PRODUCT)
+db = conn["topmenus_product"]
 
 current_date = datetime.now(tz=pytz.UTC)
 contabo_remote_path = (
@@ -82,13 +79,13 @@ contabo_remote_path = (
     + "/"
 )
 
-ssh = paramiko.SSHClient()
-ssh.load_system_host_keys()  # Load known_hosts
-ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())  # Auto-accept unknown hosts
-ssh.connect(WP_MYSQL_HOST, username="root")
-sftp = ssh.open_sftp()
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
-print("✅ Connected to server successfully!")
+# ssh = paramiko.SSHClient()
+# ssh.load_system_host_keys()  # Load known_hosts
+# ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())  # Auto-accept unknown hosts
+# ssh.connect(WP_MYSQL_HOST, username="root")
+# sftp = ssh.open_sftp()
+# sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+# # print("✅ Connected to server successfully!")
 
 logger = ErrorLogger(
     log_to_terminal=True, log_file_name="publish-wordpress", log_to_file=True
@@ -96,10 +93,11 @@ logger = ErrorLogger(
 
 
 def process_data(data):
+    main_data = {}
+
     if data:
         for d in data:
             try:
-                main_data = get_format_data(dev_db, d["google_id"])
                 logger.info(
                     f"Publishing restaurant ------------------------------ {d['_id']}"
                 )
@@ -111,7 +109,7 @@ def process_data(data):
                     cursorclass=pymysql.cursors.DictCursor,
                 )
                 cursor = mysql_conn.cursor()
-                print("✅ Connected to sql successfully!")
+                # print("✅ Connected to sql successfully!")
                 post_id = None
 
                 if d.__contains__("long"):
@@ -150,12 +148,20 @@ def process_data(data):
                 check_with_quote = d["name"].strip()
                 check_without_quote = d["name"].replace("'", "").strip()
 
+                # check_sql = "SELECT wp.ID, wp.post_name, wp.post_title, wp.post_content, wpm.meta_key, wpm.meta_value FROM wp_posts as wp join wp_postmeta as wpm on wp.ID = wpm.post_id WHERE wp.post_title = %s OR wp.post_title = %s AND wp.post_status='publish'"
+                # check_sql = """
+                #             SELECT wp.ID, wp.post_name, wp.post_title, wp.post_content, wpm.meta_key, wpm.meta_value
+                #             FROM wp_posts as wp
+                #             JOIN wp_postmeta as wpm on wp.ID = wpm.post_id
+                #             WHERE (wp.post_title = %s OR wp.post_title = %s) AND wp.post_status='publish'
+                #             ORDER BY post_date_gmt DESC"""
                 check_sql = """
                             SELECT wp.ID, wp.post_name, wp.post_title, wp.post_content, wpm.meta_key, wpm.meta_value
                             FROM wp_posts as wp
                             JOIN wp_postmeta as wpm on wp.ID = wpm.post_id
                             WHERE (LOWER(wp.post_title) = LOWER(%s) OR LOWER(wp.post_title) = LOWER(%s)) AND wp.post_status='publish'
                             ORDER BY post_date_gmt DESC"""
+                # Execute the check query
                 cursor.execute(check_sql, (check_with_quote, check_without_quote))
                 result = cursor.fetchall()
 
@@ -180,11 +186,13 @@ def process_data(data):
                             break
 
                     if update:
+
                         update_sql = (
                             "update wp_posts set post_content= %s where ID = %s"
                         )
                         cursor.execute(update_sql, (content, post_id))
 
+                        # TODO:
                         # write to update lat long
                         update_meta(cursor, d, post_id)
 
@@ -236,7 +244,7 @@ def process_data(data):
                 else:
                     update["published_at"] = datetime.now()
 
-                ds_db.onemenus_ocr.update_one({"_id": d["_id"]}, {"$set": update})
+                db.ocr.update_one({"_id": d["_id"]}, {"$set": update})
                 logger.info(
                     msg=f"Published successfully ------------------------------ {d['_id']}"
                 )
@@ -253,7 +261,7 @@ def process_data(data):
                         "created_at": current_date,
                     }
                 }
-                ds_db.publish_errors.update_one(
+                db.publish_errors.update_one(
                     {"_id": d["_id"]}, update_data, upsert=True
                 )
                 print(d["name"])
@@ -1138,7 +1146,7 @@ if __name__ == "__main__":
         # last_cn = last_cn.replace(hour=0, minute=0, second=0, microsecond=0)  # Fix to set time to midnight
 
         data = (
-            ds_db.onemenus_ocr.find(
+            db.ocr.find(
                 {
                     "$and": [
                         {
@@ -1169,7 +1177,7 @@ if __name__ == "__main__":
                                 {"published": {"$exists": False}},
                             ]
                         },
-                        {"extracted_dishes": {"$ne": []}},
+                        {"gpt-o_cleansed": {"$ne": []}},
                         # {
                         # '$or': [
                         #     { 'created_on': { '$gte': last_cn } },
@@ -1184,8 +1192,9 @@ if __name__ == "__main__":
             .limit(WORDPRESS_LIMIT)
         )
 
+        # data = db.ocr.find({"google_id": "0x864e770c34b94247:0x9222600b6715c63f"})
     datas = list(data)
-    print(datas)
+    # print(datas)
     logger.info(f"Total {len(datas)} found")
     data1 = process_data(datas)
     logger.info(f"--")

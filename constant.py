@@ -66,21 +66,21 @@ us_states_dict = {
 
 
 project = {
-        "name": 1,
+        # "name": 1,
         "google_id": 1,
-        "address": 1,
-        "phone_no": 1,
-        "website": 1,
-        "category_cuisine_google": 1,
-        "opening_hours": 1,
+        # "address": 1,
+        # "phone_no": 1,
+        # "website": 1,
+        # "category_cuisine_google": 1,
+        # "opening_hours": 1,
         "extracted_dishes": 1,
-        "img_url": 1,
-        "amenties": 1,
-        "lat": 1,
-        "long": 1,
+        # "img_url": 1,
+        # "amenties": 1,
+        # "lat": 1,
+        # "long": 1,
         "published": 1,
-        "topmenus_published_at": 1,
-        "topmenus_republished_at": 1,
+        "published_at": 1,
+        "republished_at": 1,
     }
 
 
