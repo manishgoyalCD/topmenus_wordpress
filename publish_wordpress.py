@@ -247,27 +247,27 @@ def process_data(data):
                 print("Error in process_data: ", e)
 
 
-def ensure_remote_dir(sftp, remote_dir):
-    try:
-        sftp.chdir(remote_dir)
-    except IOError:
-        dirs = remote_dir.split("/")
-        path = ""
-        for dir in dirs:
-            path = f"{path}/{dir}"
-            try:
-                sftp.chdir(path)
-            except IOError:
-                sftp.mkdir(path)
-                sftp.chdir(path)
+# def ensure_remote_dir(sftp, remote_dir):
+#     try:
+#         sftp.chdir(remote_dir)
+#     except IOError:
+#         dirs = remote_dir.split("/")
+#         path = ""
+#         for dir in dirs:
+#             path = f"{path}/{dir}"
+#             try:
+#                 sftp.chdir(path)
+#             except IOError:
+#                 sftp.mkdir(path)
+#                 sftp.chdir(path)
 
 
 # # for localhost
-# def ensure_remote_dir(local_dir):
-#     """Ensure the directory exists on the local server (no SFTP needed)."""
-#     os.makedirs(
-#         local_dir, exist_ok=True
-#     )  # Recursively create directories if they don't exist
+def ensure_remote_dir(local_dir):
+    """Ensure the directory exists on the local server (no SFTP needed)."""
+    os.makedirs(
+        local_dir, exist_ok=True
+    )  # Recursively create directories if they don't exist
 
 
 def trim_url(url):
@@ -370,10 +370,10 @@ def insert_featured_image(cursor, data, post_id, post_title, post_name):
             filename = f"{str(post_name)}.{mime_type}"
             fileSizes = ["600x540", "560x370", "768x576", "175x175", "1024x768", ""]
 
-            ensure_remote_dir(sftp, contabo_remote_path)
+            # ensure_remote_dir(sftp, contabo_remote_path)
 
             # # for localhost
-            # ensure_remote_dir(contabo_remote_path)
+            ensure_remote_dir(contabo_remote_path)
 
             # Define the remote file path
             db_file_path = ""
@@ -399,10 +399,10 @@ def insert_featured_image(cursor, data, post_id, post_title, post_name):
                 img.save(local_temp_file)
 
                 # Upload the temporary file to the remote server
-                sftp.put(local_temp_file, remote_file_path)
+                # sftp.put(local_temp_file, remote_file_path)
 
                 # # For localhost
-                # shutil.copy(local_temp_file, remote_file_path)
+                shutil.copy(local_temp_file, remote_file_path)
 
             guid = guid + filename
             post_date = current_date.strftime("%Y-%m-%d %H:%M:%S")
