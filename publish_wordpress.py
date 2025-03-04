@@ -84,7 +84,7 @@ def process_data(data):
                 rest_data = get_format_data(dev_db, d["google_id"])
                 d.update(rest_data)
                 logger.info(
-                    f"Publishing restaurant ------------------------------ {d['_id']} | {d["google_id"]}"
+                    f"Publishing restaurant ------------------------------ {d['_id']} | {d['google_id']}"
                 )
                 mysql_conn = pymysql.connect(
                     host=WP_MYSQL_HOST,
@@ -227,7 +227,7 @@ def process_data(data):
                     {"google_id": d["google_id"]}, {"$set": update}
                 )
                 logger.info(
-                    f"Published restaurant ------------------------------ {d['_id']} | {d["google_id"]}"
+                    f"Published restaurant ------------------------------ {d['_id']} | {d['google_id']}"
                 )
             except Exception as e:
                 traceback.print_exc()
