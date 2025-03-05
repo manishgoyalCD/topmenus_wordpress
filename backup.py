@@ -90,10 +90,11 @@ def rotate_backups():
     if create_mysql_backup(TODAY_BACKUP):
         # upload_to_s3(TODAY_BACKUP)
         if os.path.exists(YESTERDAY_BACKUP):
-            os.replace(YESTERDAY_BACKUP, DAY_BEFORE_YESTERDAY_BACKUP)
+            # os.replace(YESTERDAY_BACKUP, DAY_BEFORE_YESTERDAY_BACKUP)
             # upload_to_s3(DAY_BEFORE_YESTERDAY_BACKUP)
-        os.replace(TODAY_BACKUP, YESTERDAY_BACKUP)
+        # os.replace(TODAY_BACKUP, YESTERDAY_BACKUP)
         # upload_to_s3(YESTERDAY_BACKUP)
+            pass
 
     # Weekly Backup (Replaces every 7 days, on Sunday)
     if today.weekday() == 6:  # Sunday
