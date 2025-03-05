@@ -1,1 +1,7 @@
 .env
+featured_images/*
+logs/*
+venv/*
+*.sh
+__pycache__/*
+*.log
