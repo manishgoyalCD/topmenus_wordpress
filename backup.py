@@ -77,25 +77,21 @@ def rename_or_create_file_on_s3(src_key, dest_key):
             aws_access_key_id=S3_ACCESS_KEY, aws_secret_access_key=S3_SECRET_KEY
         )
         s3 = session.client("s3", endpoint_url=S3_ENDPOINT)
+        src_key = f"{MYSQL_S3_FOLDER}/{src_key}"
+        dest_key = f"{MYSQL_S3_FOLDER}/{dest_key}"
 
-        # ✅ Step 1: Check if the source file exists
         try:
             s3.head_object(Bucket=S3_BUCKET, Key=src_key)
             file_exists = True
-        except s3.exceptions.ClientError as e:
-            if e.response["Error"]["Code"] == "404":
-                file_exists = False
-            else:
-                raise  # Raise other errors
+        except Exception as e:
+            print(f"Error in S3 uploading: {e}")
 
         if file_exists:
-            # ✅ Step 2: If the source file exists, rename (move) it
             copy_source = {"Bucket": S3_BUCKET, "Key": src_key}
             s3.copy_object(CopySource=copy_source, Bucket=S3_BUCKET, Key=dest_key)
-            s3.delete_object(Bucket=S3_BUCKET, Key=src_key)
+            # s3.delete_object(Bucket=S3_BUCKET, Key=src_key)
             print(f"[✔] Renamed {src_key} to {dest_key} on S3")
         else:
-            # ✅ Step 3: If source file doesn't exist, create an empty file at dest_key
             s3.put_object(Bucket=S3_BUCKET, Key=dest_key, Body=b"")
             print(f"[✔] Created empty file: {dest_key} on S3")
 
@@ -103,7 +99,6 @@ def rename_or_create_file_on_s3(src_key, dest_key):
         print(f"[✖] Error in S3 operation: {e}")
 
 
-# Function to manage backup rotation
 def rotate_backups():
     today = datetime.now()
 
