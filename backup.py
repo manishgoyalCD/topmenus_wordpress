@@ -63,7 +63,7 @@ def upload_to_s3(file_path):
         s3 = session.resource("s3", endpoint_url=S3_ENDPOINT)
         bucket = s3.Bucket(S3_BUCKET)
 
-        s3_key = f"{MYSQL_S3_FOLDER}/{os.path.basename(file_path)}"
+        s3_key = f"{MYSQL_S3_FOLDER}/{file_path}"
         print(f"[+] Uploading {file_path} to S3: {s3_key}")
         bucket.upload_file(file_path, s3_key)
         print(f"[✔] Upload successful: {s3_key}")
@@ -147,7 +147,7 @@ if __name__ == "__main__":
             THREE_MONTH_BACKUP = f"{INDEX}_backup_3_months.gz"
             SIX_MONTH_BACKUP = f"{INDEX}_backup_6_months.gz"
             rotate_backups()
-        os.remove(MYSQL_BACKUP_DIR)
+        # os.remove(MYSQL_BACKUP_DIR)
         print("[✔] Backup process completed")
     except Exception as e:
         print(f"Error while running backup script: {e}")
