@@ -28,6 +28,7 @@ S3_ENDPOINT = os.getenv("S3_ENDPOINT")
 # Ensure backup directory exists
 os.makedirs(MYSQL_BACKUP_DIR, exist_ok=True)
 
+
 # Function to create MySQL backup
 def create_mysql_backup(backup_file):
     try:
@@ -71,7 +72,6 @@ def upload_to_s3(file_path):
         print(f"[✖] Error uploading to S3: {e}")
 
 
-
 def rename_or_create_file_on_s3(src_key, dest_key):
     try:
         session = boto3.Session(
@@ -102,7 +102,6 @@ def rename_or_create_file_on_s3(src_key, dest_key):
 
     except Exception as e:
         print(f"[✖] Error in S3 operation: {e}")
-
 
 
 # Function to manage backup rotation
@@ -141,25 +140,15 @@ if __name__ == "__main__":
     print("[+] Starting MySQL Backup Process")
     try:
         for INDEX in [MYSQL_DB]:
-            TODAY_BACKUP = os.path.join(MYSQL_BACKUP_DIR, f"{INDEX}_backup_today.gz")
-            YESTERDAY_BACKUP = os.path.join(
-                MYSQL_BACKUP_DIR, f"{INDEX}_backup_yesterday.gz"
-            )
-            DAY_BEFORE_YESTERDAY_BACKUP = os.path.join(
-                MYSQL_BACKUP_DIR, f"{INDEX}_backup_2_days_ago.gz"
-            )
+            TODAY_BACKUP = f"{INDEX}_backup_today.gz"
+            YESTERDAY_BACKUP = f"{INDEX}_backup_yesterday.gz"
+            DAY_BEFORE_YESTERDAY_BACKUP = f"{INDEX}_backup_2_days_ago.gz"
             WEEKLY_BACKUP = os.path.join(MYSQL_BACKUP_DIR, f"{INDEX}_backup_weekly.gz")
-            MONTHLY_BACKUP = os.path.join(
-                MYSQL_BACKUP_DIR, f"{INDEX}_backup_monthly.gz"
-            )
-            THREE_MONTH_BACKUP = os.path.join(
-                MYSQL_BACKUP_DIR, f"{INDEX}_backup_3_months.gz"
-            )
-            SIX_MONTH_BACKUP = os.path.join(
-                MYSQL_BACKUP_DIR, f"{INDEX}_backup_6_months.gz"
-            )
+            MONTHLY_BACKUP = f"{INDEX}_backup_monthly.gz"
+            THREE_MONTH_BACKUP = f"{INDEX}_backup_3_months.gz"
+            SIX_MONTH_BACKUP = f"{INDEX}_backup_6_months.gz"
             rotate_backups()
-            os.remove(backup_filepath)
+            # os.remove(backup_filepath)
         print("[✔] Backup process completed")
     except Exception as e:
         print(f"Error while running backup script: {e}")
