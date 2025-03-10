@@ -8,7 +8,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Define backup directory
-BACKUP_DIR = "./mysql_backups"
+MYSQL_BACKUP_DIR = "./mysql_backup"
+MONGO_BACKUP_DIR = "./mongo_backup"
 
 # Define MySQL credentials from environment variables
 MYSQL_USER = os.getenv("WP_MYSQL_USER")
@@ -18,25 +19,14 @@ MYSQL_PORT = os.getenv("WP_MYSQL_PORT")
 MYSQL_DB = os.getenv("WP_MYSQL_DB")
 
 # Define S3 credentials
+MYSQL_S3_FOLDER = "mysql_backup"
 S3_ACCESS_KEY = os.getenv("S3_ACCESS_KEY")
 S3_SECRET_KEY = os.getenv("S3_SECRET_KEY")
 S3_BUCKET = os.getenv("S3_BUCKET")
-S3_ENDPOINT = os.getenv("S3_ENDPOINT")  # For Wasabi or custom S3
-S3_FOLDER = "mysql_backup"
-
-# Define backup filenames
-TODAY_BACKUP = os.path.join(BACKUP_DIR, f"{MYSQL_DB}_backup_today.gz")
-YESTERDAY_BACKUP = os.path.join(BACKUP_DIR, f"{MYSQL_DB}_backup_yesterday.gz")
-DAY_BEFORE_YESTERDAY_BACKUP = os.path.join(
-    BACKUP_DIR, f"{MYSQL_DB}_backup_2_days_ago.gz"
-)
-WEEKLY_BACKUP = os.path.join(BACKUP_DIR, f"{MYSQL_DB}_backup_weekly.gz")
-MONTHLY_BACKUP = os.path.join(BACKUP_DIR, f"{MYSQL_DB}_backup_monthly.gz")
-THREE_MONTH_BACKUP = os.path.join(BACKUP_DIR, f"{MYSQL_DB}_backup_3_months.gz")
-SIX_MONTH_BACKUP = os.path.join(BACKUP_DIR, f"{MYSQL_DB}_backup_6_months.gz")
+S3_ENDPOINT = os.getenv("S3_ENDPOINT")
 
 # Ensure backup directory exists
-os.makedirs(BACKUP_DIR, exist_ok=True)
+os.makedirs(MYSQL_BACKUP_DIR, exist_ok=True)
 
 
 # Function to create MySQL backup
@@ -74,12 +64,27 @@ def upload_to_s3(file_path):
         s3 = session.resource("s3", endpoint_url=S3_ENDPOINT)
         bucket = s3.Bucket(S3_BUCKET)
 
-        s3_key = f"{S3_FOLDER}/{os.path.basename(file_path)}"
+        s3_key = f"{MYSQL_S3_FOLDER}/{os.path.basename(file_path)}"
         print(f"[+] Uploading {file_path} to S3: {s3_key}")
         bucket.upload_file(file_path, s3_key)
         print(f"[✔] Upload successful: {s3_key}")
     except Exception as e:
         print(f"[✖] Error uploading to S3: {e}")
+
+
+def replace_file_on_s3(src_key, dest_key):
+    try:
+        session = boto3.Session(
+            aws_access_key_id=S3_ACCESS_KEY, aws_secret_access_key=S3_SECRET_KEY
+        )
+        s3 = session.client("s3", endpoint_url=S3_ENDPOINT)
+
+        copy_source = {"Bucket": S3_BUCKET, "Key": src_key}
+        s3.copy(copy_source, S3_BUCKET, dest_key)
+        s3.delete_object(Bucket=S3_BUCKET, Key=src_key)
+        print(f"[✔] Moved {src_key} to {dest_key} on S3")
+    except Exception as e:
+        print(f"[✖] Error moving file on S3: {e}")
 
 
 # Function to manage backup rotation
@@ -88,41 +93,54 @@ def rotate_backups():
 
     # Daily Backups (Today, Yesterday, Day-Before-Yesterday)
     if create_mysql_backup(TODAY_BACKUP):
-        # upload_to_s3(TODAY_BACKUP)
-        if os.path.exists(YESTERDAY_BACKUP):
-            # os.replace(YESTERDAY_BACKUP, DAY_BEFORE_YESTERDAY_BACKUP)
-            # upload_to_s3(DAY_BEFORE_YESTERDAY_BACKUP)
-        # os.replace(TODAY_BACKUP, YESTERDAY_BACKUP)
-        # upload_to_s3(YESTERDAY_BACKUP)
-            pass
+        replace_file_on_s3(YESTERDAY_BACKUP, DAY_BEFORE_YESTERDAY_BACKUP)
+        replace_file_on_s3(TODAY_BACKUP, YESTERDAY_BACKUP)
+        upload_to_s3(TODAY_BACKUP)
 
     # Weekly Backup (Replaces every 7 days, on Sunday)
     if today.weekday() == 6:  # Sunday
         if create_mysql_backup(WEEKLY_BACKUP):
-            pass
-            # upload_to_s3(WEEKLY_BACKUP)
+            upload_to_s3(WEEKLY_BACKUP)
 
     # Monthly Backup (Replaces on the 1st of the month)
     if today.day == 1:
         if create_mysql_backup(MONTHLY_BACKUP):
-            pass
-            # upload_to_s3(MONTHLY_BACKUP)
+            upload_to_s3(MONTHLY_BACKUP)
 
     # 3-Month Backup (Replaces in Jan, Apr, Jul, Oct on the 1st)
     if today.month in [1, 4, 7, 10] and today.day == 1:
         if create_mysql_backup(THREE_MONTH_BACKUP):
-            pass
-            # upload_to_s3(THREE_MONTH_BACKUP)
+            upload_to_s3(THREE_MONTH_BACKUP)
 
-    # 6-Month Backup (Replaces in Jan & Jul on the 1st)
-    if today.month in [1, 7] and today.day == 1:
+    # 6-Month Backup (Replaces in Apr & Jul on the 1st)
+    if today.month in [4, 10] and today.day == 1:
         if create_mysql_backup(SIX_MONTH_BACKUP):
-            pass
-            # upload_to_s3(SIX_MONTH_BACKUP)
+            upload_to_s3(SIX_MONTH_BACKUP)
 
 
 # Run backup process
 if __name__ == "__main__":
     print("[+] Starting MySQL Backup Process")
-    rotate_backups()
-    print("[✔] Backup process completed")
+    try:
+        for INDEX in [MYSQL_DB]:
+            TODAY_BACKUP = os.path.join(MYSQL_BACKUP_DIR, f"{INDEX}_backup_today.gz")
+            YESTERDAY_BACKUP = os.path.join(
+                MYSQL_BACKUP_DIR, f"{INDEX}_backup_yesterday.gz"
+            )
+            DAY_BEFORE_YESTERDAY_BACKUP = os.path.join(
+                MYSQL_BACKUP_DIR, f"{INDEX}_backup_2_days_ago.gz"
+            )
+            WEEKLY_BACKUP = os.path.join(MYSQL_BACKUP_DIR, f"{INDEX}_backup_weekly.gz")
+            MONTHLY_BACKUP = os.path.join(
+                MYSQL_BACKUP_DIR, f"{INDEX}_backup_monthly.gz"
+            )
+            THREE_MONTH_BACKUP = os.path.join(
+                MYSQL_BACKUP_DIR, f"{INDEX}_backup_3_months.gz"
+            )
+            SIX_MONTH_BACKUP = os.path.join(
+                MYSQL_BACKUP_DIR, f"{INDEX}_backup_6_months.gz"
+            )
+            rotate_backups()
+        print("[✔] Backup process completed")
+    except Exception as e:
+        print(f"Error while running backup script: {e}")

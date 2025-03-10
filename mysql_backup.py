@@ -51,8 +51,8 @@ def create_mysql_backup():
             '--lock-tables=false'
         ])
         logget.info(msg=f"Backup created at {backup_filepath}")
-#         upload_to_s3()
-#         os.remove(backup_filepath)
+        # upload_to_s3()
+        # os.remove(backup_filepath)
     except subprocess.CalledProcessError as e:
         logget.exception(msg=f"[-] Error creating backup: {e}")
         raise
