@@ -73,6 +73,7 @@ def upload_to_s3(file_path):
 
 def rename_or_create_file_on_s3(src_key, dest_key):
     try:
+        file_exists=False
         session = boto3.Session(
             aws_access_key_id=S3_ACCESS_KEY, aws_secret_access_key=S3_SECRET_KEY
         )
