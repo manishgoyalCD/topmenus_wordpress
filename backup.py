@@ -3,6 +3,7 @@ import subprocess
 import boto3
 from datetime import datetime
 from dotenv import load_dotenv
+import botocore.config
 
 # Load environment variables
 load_dotenv()
@@ -23,6 +24,12 @@ S3_ACCESS_KEY = os.getenv("S3_ACCESS_KEY")
 S3_SECRET_KEY = os.getenv("S3_SECRET_KEY")
 S3_BUCKET = os.getenv("S3_BUCKET")
 S3_ENDPOINT = os.getenv("S3_ENDPOINT")
+
+AWS_CONFIG = botocore.config.Config(
+    read_timeout=300,  # Equivalent to --cli-read-timeout 300
+    connect_timeout=60  # Equivalent to --cli-connect-timeout 60
+)
+
 
 # Ensure backup directory exists
 os.makedirs(MYSQL_BACKUP_DIR, exist_ok=True)
@@ -73,11 +80,11 @@ def upload_to_s3(file_path):
 
 def rename_or_create_file_on_s3(src_key, dest_key):
     try:
-        file_exists=False
+        file_exists = False
         session = boto3.Session(
             aws_access_key_id=S3_ACCESS_KEY, aws_secret_access_key=S3_SECRET_KEY
         )
-        s3 = session.client("s3", endpoint_url=S3_ENDPOINT)
+        s3 = session.client("s3", endpoint_url=S3_ENDPOINT, config=AWS_CONFIG)
         src_key = f"{MYSQL_S3_FOLDER}/{src_key}"
         dest_key = f"{MYSQL_S3_FOLDER}/{dest_key}"
 
@@ -88,9 +95,9 @@ def rename_or_create_file_on_s3(src_key, dest_key):
             print(f"Error in S3 uploading: {e}")
 
         if file_exists:
+            # s3.delete_object(Bucket=S3_BUCKET, Key="mysql_backup/wordpress_backup_2_days_ago.gz")
             copy_source = {"Bucket": S3_BUCKET, "Key": src_key}
-            s3.copy_object(CopySource=copy_source, Bucket=S3_BUCKET, Key=dest_key)
-            # s3.delete_object(Bucket=S3_BUCKET, Key=src_key)
+            s3.copy_object(CopySource=copy_source, Bucket=S3_BUCKET, Key=dest_key, )
             print(f"[✔] Renamed {src_key} to {dest_key} on S3")
         else:
             s3.put_object(Bucket=S3_BUCKET, Key=dest_key, Body=b"")
