@@ -9,7 +9,6 @@ load_dotenv()
 
 # Define backup directory
 MYSQL_BACKUP_DIR = "./mysql_backup"
-MONGO_BACKUP_DIR = "./mongo_backup"
 
 # Define MySQL credentials from environment variables
 MYSQL_USER = os.getenv("WP_MYSQL_USER")
@@ -143,12 +142,12 @@ if __name__ == "__main__":
             TODAY_BACKUP = f"{INDEX}_backup_today.gz"
             YESTERDAY_BACKUP = f"{INDEX}_backup_yesterday.gz"
             DAY_BEFORE_YESTERDAY_BACKUP = f"{INDEX}_backup_2_days_ago.gz"
-            WEEKLY_BACKUP = os.path.join(MYSQL_BACKUP_DIR, f"{INDEX}_backup_weekly.gz")
+            WEEKLY_BACKUP = f"{INDEX}_backup_weekly.gz"
             MONTHLY_BACKUP = f"{INDEX}_backup_monthly.gz"
             THREE_MONTH_BACKUP = f"{INDEX}_backup_3_months.gz"
             SIX_MONTH_BACKUP = f"{INDEX}_backup_6_months.gz"
             rotate_backups()
-            # os.remove(backup_filepath)
+        os.remove(MYSQL_BACKUP_DIR)
         print("[✔] Backup process completed")
     except Exception as e:
         print(f"Error while running backup script: {e}")
