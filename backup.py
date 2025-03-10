@@ -71,15 +71,6 @@ def upload_to_s3(file_path):
         print(f"[✖] Error uploading to S3: {e}")
 
 
-import boto3
-import os
-
-S3_ACCESS_KEY = "your_access_key"
-S3_SECRET_KEY = "your_secret_key"
-S3_BUCKET = "your_bucket_name"
-S3_ENDPOINT = "your_s3_endpoint"
-S3_FOLDER = "mongo_backup"
-
 
 def rename_or_create_file_on_s3(src_key, dest_key):
     try:
@@ -168,6 +159,7 @@ if __name__ == "__main__":
                 MYSQL_BACKUP_DIR, f"{INDEX}_backup_6_months.gz"
             )
             rotate_backups()
+            os.remove(backup_filepath)
         print("[✔] Backup process completed")
     except Exception as e:
         print(f"Error while running backup script: {e}")
