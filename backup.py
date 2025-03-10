@@ -28,7 +28,6 @@ S3_ENDPOINT = os.getenv("S3_ENDPOINT")
 # Ensure backup directory exists
 os.makedirs(MYSQL_BACKUP_DIR, exist_ok=True)
 
-
 # Function to create MySQL backup
 def create_mysql_backup(backup_file):
     try:
@@ -72,19 +71,47 @@ def upload_to_s3(file_path):
         print(f"[✖] Error uploading to S3: {e}")
 
 
-def replace_file_on_s3(src_key, dest_key):
+import boto3
+import os
+
+S3_ACCESS_KEY = "your_access_key"
+S3_SECRET_KEY = "your_secret_key"
+S3_BUCKET = "your_bucket_name"
+S3_ENDPOINT = "your_s3_endpoint"
+S3_FOLDER = "mongo_backup"
+
+
+def rename_or_create_file_on_s3(src_key, dest_key):
     try:
         session = boto3.Session(
             aws_access_key_id=S3_ACCESS_KEY, aws_secret_access_key=S3_SECRET_KEY
         )
         s3 = session.client("s3", endpoint_url=S3_ENDPOINT)
 
-        copy_source = {"Bucket": S3_BUCKET, "Key": src_key}
-        s3.copy(copy_source, S3_BUCKET, dest_key)
-        s3.delete_object(Bucket=S3_BUCKET, Key=src_key)
-        print(f"[✔] Moved {src_key} to {dest_key} on S3")
+        # ✅ Step 1: Check if the source file exists
+        try:
+            s3.head_object(Bucket=S3_BUCKET, Key=src_key)
+            file_exists = True
+        except s3.exceptions.ClientError as e:
+            if e.response["Error"]["Code"] == "404":
+                file_exists = False
+            else:
+                raise  # Raise other errors
+
+        if file_exists:
+            # ✅ Step 2: If the source file exists, rename (move) it
+            copy_source = {"Bucket": S3_BUCKET, "Key": src_key}
+            s3.copy_object(CopySource=copy_source, Bucket=S3_BUCKET, Key=dest_key)
+            s3.delete_object(Bucket=S3_BUCKET, Key=src_key)
+            print(f"[✔] Renamed {src_key} to {dest_key} on S3")
+        else:
+            # ✅ Step 3: If source file doesn't exist, create an empty file at dest_key
+            s3.put_object(Bucket=S3_BUCKET, Key=dest_key, Body=b"")
+            print(f"[✔] Created empty file: {dest_key} on S3")
+
     except Exception as e:
-        print(f"[✖] Error moving file on S3: {e}")
+        print(f"[✖] Error in S3 operation: {e}")
+
 
 
 # Function to manage backup rotation
@@ -93,8 +120,8 @@ def rotate_backups():
 
     # Daily Backups (Today, Yesterday, Day-Before-Yesterday)
     if create_mysql_backup(TODAY_BACKUP):
-        replace_file_on_s3(YESTERDAY_BACKUP, DAY_BEFORE_YESTERDAY_BACKUP)
-        replace_file_on_s3(TODAY_BACKUP, YESTERDAY_BACKUP)
+        rename_or_create_file_on_s3(YESTERDAY_BACKUP, DAY_BEFORE_YESTERDAY_BACKUP)
+        rename_or_create_file_on_s3(TODAY_BACKUP, YESTERDAY_BACKUP)
         upload_to_s3(TODAY_BACKUP)
 
     # Weekly Backup (Replaces every 7 days, on Sunday)
