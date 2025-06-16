@@ -1,1191 +1,507 @@
-# Description:
-# This script inserts job listing posts into a WordPress site using data from a MongoDB database.
-# It processes the data, formats business hours, and inserts posts with the corresponding metadata.
-
-# Dependencies:
-# - argparse: For parsing command-line arguments.
-# - concurrent.futures: For handling concurrency with ThreadPoolExecutor.
-# - datetime: For working with dates and times.
-# - re: For regular expressions.
-# - pymysql: For MySQL database operations.
-# - pymongo: For MongoDB operations.
-
-# Arguments:
-# - --name: (str) Enter the restaurant name, separating each with a comma. Defaults to an empty string.
-# - --limit: (str) Enter the limit. Defaults to 0.
-
-# Response Type:
-# The script does not explicitly return a response. It performs database operations to insert data into WordPress.
-
-import pymongo
-import concurrent.futures
-import datetime
-from bson import ObjectId
-import json
-import traceback
-import phpserialize
-import pymysql
-import unicodedata
-import re
-import pytz
-import random
-import string
-from collections import defaultdict
-import argparse
-import traceback
-import sys
-import os
-import io
+import pandas as pd
+from sqlalchemy import create_engine, Table, MetaData, select
+from urllib.parse import quote_plus
 import requests
-import magic
-import paramiko
-from datetime import timedelta, datetime
-from urllib.parse import urlparse
-from PIL import Image
-from io import BytesIO
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from constant import *
-from dotenv import load_dotenv
-from logger import ErrorLogger
-import shutil
-from os import getenv
-import hashlib
-from utils import *
+import os
+import time
 
-load_dotenv(override=True)
-slugSet = set()
+category_payload = [
+    {"id": "0", "text": "All Categories"},
+    {"id": "6018", "text": "Books"},
+    {"id": "6000", "text": "Business"},
+    {"id": "6026", "text": "Developer Tools"},
+    {"id": "6017", "text": "Education"},
+    {"id": "6016", "text": "Entertainment"},
+    {"id": "6015", "text": "Finance"},
+    {"id": "6023", "text": "Food & Drink"},
+    {
+        "id": "6014",
+        "text": "GamesGames / ActionGames / AdventureGames / BoardGames / CardGames / CasinoGames / CasualGames / FamilyGames / MusicGames / PuzzleGames / RacingGames / Role PlayingGames / SimulationGames / SportsGames / StrategyGames / TriviaGames / Word",
+    },
+    {"id": "7001", "text": "Games / Action"},
+    {"id": "7002", "text": "Games / Adventure"},
+    {"id": "7004", "text": "Games / Board"},
+    {"id": "7005", "text": "Games / Card"},
+    {"id": "7006", "text": "Games / Casino"},
+    {"id": "7003", "text": "Games / Casual"},
+    {"id": "7009", "text": "Games / Family"},
+    {"id": "7011", "text": "Games / Music"},
+    {"id": "7012", "text": "Games / Puzzle"},
+    {"id": "7013", "text": "Games / Racing"},
+    {"id": "7014", "text": "Games / Role Playing"},
+    {"id": "7015", "text": "Games / Simulation"},
+    {"id": "7016", "text": "Games / Sports"},
+    {"id": "7017", "text": "Games / Strategy"},
+    {"id": "7018", "text": "Games / Trivia"},
+    {"id": "7019", "text": "Games / Word"},
+    {"id": "6027", "text": "Graphics & Design"},
+    {"id": "6013", "text": "Health & Fitness"},
+    {"id": "9007", "text": "KidsKids / Ages 5 & UnderKids / Ages 6-8Kids / Ages 9-11"},
+    {"id": "10000", "text": "Kids / Ages 5 & Under"},
+    {"id": "10001", "text": "Kids / Ages 6-8"},
+    {"id": "10002", "text": "Kids / Ages 9-11"},
+    {"id": "6012", "text": "Lifestyle"},
+    {"id": "6020", "text": "Medical"},
+    {"id": "6011", "text": "Music"},
+    {"id": "6010", "text": "Navigation"},
+    {"id": "6009", "text": "News"},
+    {"id": "6008", "text": "Photo & Video"},
+    {"id": "6007", "text": "Productivity"},
+    {"id": "6006", "text": "Reference"},
+    {"id": "6024", "text": "Shopping"},
+    {"id": "6005", "text": "Social Networking"},
+    {"id": "6004", "text": "Sports"},
+    {"id": "6003", "text": "Travel"},
+    {"id": "6002", "text": "Utilities"},
+    {"id": "6001", "text": "Weather"},
+]
 
-WORDPRESS_LIMIT = int(getenv("WORDPRESS_LIMIT"))
-WP_MYSQL_HOST = getenv("WP_MYSQL_HOST")
-WP_MYSQL_USER = getenv("WP_MYSQL_USER")
-WP_MYSQL_PASS = getenv("WP_MYSQL_PASS")
-WP_MYSQL_DB = getenv("WP_MYSQL_DB")
-WP_MYSQL_PORT = getenv("WP_MYSQL_PORT")
-ONE_MENUS_PRODUCT = getenv("ONE_MENUS_PRODUCT")
-GOOGLE_MAPS_DB_URI = getenv("GOOGLE_MAPS_DB_URI")
-contabo_host = getenv("WP_HOST")
-contabo_port = getenv("WP_PORT")
-contabo_username = getenv("WP_USER")
-contabo_password = getenv("WP_PASS")
-
-ds_conn = pymongo.MongoClient(ONE_MENUS_PRODUCT)
-ds_db = ds_conn["topmenus_product"]
-dev_conn = pymongo.MongoClient(GOOGLE_MAPS_DB_URI)
-dev_db = dev_conn["topmenus_crawling"]
-
-current_date = datetime.now(tz=pytz.UTC)
-contabo_remote_path = (
-    "/var/www/html/wp-content/uploads/"
-    + current_date.strftime("%Y")
-    + "/"
-    + current_date.strftime("%m")
-    + "/"
-)
-
-ssh = paramiko.SSHClient()
-ssh.load_system_host_keys()  # Load known_hosts
-ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())  # Auto-accept unknown hosts
-ssh.connect(WP_MYSQL_HOST, username="root")
-sftp = ssh.open_sftp()
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
-print("✅ Connected to server successfully!")
-
-logger = ErrorLogger(
-    log_to_terminal=True, log_file_name="publish-wordpress", log_to_file=True
-)
-
-
-def process_data(data):
-    if data:
-        for d in data:
-            try:
-                main_data = get_format_data(dev_db, d["google_id"])
-                logger.info(
-                    f"Publishing restaurant ------------------------------ {d['_id']}"
-                )
-                mysql_conn = pymysql.connect(
-                    host=WP_MYSQL_HOST,
-                    user=WP_MYSQL_USER,
-                    password=WP_MYSQL_PASS,
-                    database=WP_MYSQL_DB,
-                    cursorclass=pymysql.cursors.DictCursor,
-                )
-                cursor = mysql_conn.cursor()
-                print("✅ Connected to sql successfully!")
-                post_id = None
-
-                if d.__contains__("long"):
-                    d["long"] = str(d["long"])  # .replace('-', '')
-
-                if d.__contains__("lat"):
-                    d["lat"] = str(d["lat"])  # .replace('-', '')
-
-                if not d.get("phone_no"):
-                    d["phone_no"] = ""
-
-                post_title = d["name"].replace("'", "")
-
-                post_name = generate_unique_slug(
-                    d["_id"],
-                    d["name"]
-                    .replace("-", "")
-                    .replace(".", "")
-                    .replace(",", "")
-                    .replace(";", "")
-                    .replace(":", ""),
-                )
-                post_name = f"{post_name}-menu"
-                print("post_name -", post_name)
-
-                content = generate_content(d, post_title)
-                business_hours = ""
-                if (
-                    "opening_hours" in d
-                    and not (isinstance(d["opening_hours"], float))
-                    and d["opening_hours"]
-                ):
-                    business_hours = generate_business_hours(d["opening_hours"])
-
-                # CHECK IF POST ALREADY EXISTS
-                check_with_quote = d["name"].strip()
-                check_without_quote = d["name"].replace("'", "").strip()
-
-                check_sql = """
-                            SELECT wp.ID, wp.post_name, wp.post_title, wp.post_content, wpm.meta_key, wpm.meta_value
-                            FROM wp_posts as wp
-                            JOIN wp_postmeta as wpm on wp.ID = wpm.post_id
-                            WHERE (LOWER(wp.post_title) = LOWER(%s) OR LOWER(wp.post_title) = LOWER(%s)) AND wp.post_status='publish'
-                            ORDER BY post_date_gmt DESC"""
-                cursor.execute(check_sql, (check_with_quote, check_without_quote))
-                result = cursor.fetchall()
-
-                # if result is found then check if same address already exitsts
-                if result:
-                    update = False
-                    lt_address = None
-                    thumbnail_status = False
-                    for row in result:
-
-                        if row["meta_key"] == "_lt_address":
-                            lt_address = row["meta_value"]
-                        if (
-                            lt_address
-                            and lt_address.replace(", United States", "").strip()
-                            == d["address"].replace(", United States", "").strip()
-                        ):
-                            update = True
-                            post_id = row["ID"]
-                            if row["meta_key"] == "_thumbnail_id":
-                                thumbnail_status = True
-                            break
-
-                    if update:
-                        update_sql = (
-                            "update wp_posts set post_content= %s where ID = %s"
-                        )
-                        cursor.execute(update_sql, (content, post_id))
-
-                        # write to update lat long
-                        update_meta(cursor, d, post_id)
-
-                        # update meta data
-                        update_meta_data(
-                            cursor, post_id, post_title, post_name, d, business_hours
-                        )
-                        print(f"{post_title} - {post_id} - updated")
-
-                        # if not thumbnail_status:
-                        #     try:
-                        #         insert_featured_image(d, post_id, post_title, post_name)
-                        #     except:
-                        #         logger.info(msg="Error in featured image")
-
-                    else:
-                        last_insert_id = insert_post(
-                            cursor, d, post_title, post_name, content, business_hours
-                        )
-                        print(f"{post_title}  -  {last_insert_id} - inserted")
-                        try:
-                            insert_featured_image(
-                                cursor, d, last_insert_id, post_title, post_name
-                            )
-                        except Exception as e:
-                            logger.info(msg=f"Error in featured image - {e}")
-                else:
-                    last_insert_id = insert_post(
-                        cursor, d, post_title, post_name, content, business_hours
-                    )
-                    print(f"{post_title}  -  {last_insert_id} - inserted")
-                    # image create code
-                    try:
-                        insert_featured_image(
-                            cursor, d, last_insert_id, post_title, post_name
-                        )
-                    except Exception as e:
-                        logger.info(msg=f"Error in featured image - {e}")
-                mysql_conn.commit()
-                mysql_conn.close()
-
-                update = {
-                    "published": True,
-                    "topmenus_slug": post_name,
-                }
-
-                if d.get("published"):
-                    update["republished_at"] = datetime.now()
-                else:
-                    update["published_at"] = datetime.now()
-
-                ds_db.onemenus_ocr.update_one({"_id": d["_id"]}, {"$set": update})
-                logger.info(
-                    msg=f"Published successfully ------------------------------ {d['_id']}"
-                )
-            except Exception as e:
-                traceback.print_exc()
-                logger.exception(msg=f'error in main - {d["name"]}')
-                update_data = {
-                    "$set": {
-                        "id": d["_id"],
-                        "name": d["name"],
-                        # 'type': type(e).__name__,
-                        "error": str(e),
-                        "message": traceback.format_exc(),
-                        "created_at": current_date,
-                    }
-                }
-                ds_db.publish_errors.update_one(
-                    {"_id": d["_id"]}, update_data, upsert=True
-                )
-                print(d["name"])
-                print("Error in process_data: ", e)
+regions = [
+    "US",
+    "AU",
+    "CA",
+    "CN",
+    "FR",
+    "DE",
+    "GB",
+    "IT",
+    "JP",
+    "RU",
+    "KR",
+    "DZ",
+    "AO",
+    "AR",
+    "AT",
+    "AZ",
+    "BH",
+    "BB",
+    "BY",
+    "BE",
+    "BM",
+    "BO",
+    "BR",
+    "BG",
+    "KH",
+    "CL",
+    "CO",
+    "CR",
+    "HR",
+    "CY",
+    "CZ",
+    "DK",
+    "DO",
+    "EC",
+    "EG",
+    "SV",
+    "EE",
+    "FI",
+    "GE",
+    "GH",
+    "GR",
+    "GT",
+    "HK",
+    "HU",
+    "IN",
+    "ID",
+    "IE",
+    "IL",
+    "KZ",
+    "KE",
+    "KW",
+    "LV",
+    "LB",
+    "LT",
+    "LU",
+    "MO",
+    "MG",
+    "MY",
+    "MT",
+    "MX",
+    "NL",
+    "NZ",
+    "NI",
+    "NG",
+    "NO",
+    "OM",
+    "PK",
+    "PA",
+    "PY",
+    "PE",
+    "PH",
+    "PL",
+    "PT",
+    "QA",
+    "RO",
+    "SA",
+    "RS",
+    "SG",
+    "SK",
+    "SI",
+    "ZA",
+    "ES",
+    "LK",
+    "SE",
+    "CH",
+    "TW",
+    "TH",
+    "TN",
+    "TR",
+    "UA",
+    "AE",
+    "UY",
+    "UZ",
+    "VE",
+    "VN",
+]
 
 
-def ensure_remote_dir(sftp, remote_dir):
+# Main usage
+host = "91.203.132.40"
+user = "developer_user"
+password = "leLtfDeeEVcehLCoiPk@ewRUu%gUnms%EyrYvqxZ"
+database = "collegedunia_test"
+
+# Database connection details
+db_config = {
+    "username": user,
+    "password": password,
+    "host": "91.203.132.40",
+    "port": 3306,
+    "database": database,
+}
+
+# URL encode the username and password
+username = quote_plus(db_config["username"])
+password = quote_plus(db_config["password"])
+# Reflect the table
+try:
+    engine = create_engine(
+        f"mysql+pymysql://{username}:{password}@{db_config['host']}:{db_config['port']}/{db_config['database']}"
+    )
+    connection = engine.connect()
+    print("Connection successful!")
+    connection.close()
+except Exception as e:
+    print("Connection failed:", e)
+    quit()
+
+metadata = MetaData()
+downloaded_data_table = Table("sensor_tower_daily", metadata, autoload_with=engine)
+
+
+def is_already_downloaded(category_id, start_date, device, region):
+    """
+    Check if data for the given category_id, start_date, device, and region has already been downloaded.
+    """
+    query = select(downloaded_data_table).where(
+        (downloaded_data_table.c.category_id == category_id)
+        & (
+            downloaded_data_table.c.date == start_date
+        )  # Use the correct column name for the date
+        & (
+            downloaded_data_table.c.divice == device
+        )  # Use the correct column name for the device
+        & (downloaded_data_table.c.region == region)
+    )
+    with engine.connect() as connection:
+        result = connection.execute(query).fetchone()
+        # print(result, '././././././')
+        return result is not None
+
+
+def insert_data(df, category_id, start_date, end_date, devices, regions):
+    column_mapping = {
+        "Unified Name": "name",
+        "Unified ID": "unified_id",
+        "Unified Publisher Name": "unified_publisher_name",
+        "Unified Publisher ID": "unified_publisher_id",
+        "Date": "date",
+        "Platform": "platform",
+        "Category": "category",
+        "Downloads (Absolute)": "downloads_absolute",
+        "Downloads (Growth)": "downloads_growth",
+        "Downloads (Growth %)": "downloads_growth_percent",
+        "Revenue (Absolute, $)": "revenue_absolute",
+        "Revenue (Growth, $)": "revenue_growth",
+        "Revenue (Growth %)": "revenue_growth_percent",
+        "Average DAU (Absolute)": "average_dau_absolute",
+        "Average DAU (Growth)": "average_dau_growth",
+        "Average DAU (Growth %)": "average_dau_growth_percent",
+        "Release Date (WW)": "release_date_ww",
+        "Earliest Release Date": "earliest_release_date",
+        "Publisher Country": "publisher_country",
+        "Most Popular Country by Downloads": "most_popular_country_by_downloads",
+        "Organic Downloads % (Last Q, WW)": "organic_downloads_percent_last_q_ww",
+        "Paid Downloads % (Last Q, WW)": "paid_downloads_percent_last_q_ww",
+        "All Time Downloads (WW)": "all_time_downloads_ww",
+    }
+
+    # rename the columns to match the column names in the API response
+    df.rename(columns=column_mapping, inplace=True)
+    # select specific columns
+    df["divice"] = devices
+    df["region"] = regions
+    df["category_id"] = int(category_id)
+    df_new = df
+    df = df[
+        [
+            "name",
+            "divice",
+            "region",
+            "category_id",
+            "date",
+            "category",
+            "release_date_ww",
+            "earliest_release_date",
+            "publisher_country",
+            "all_time_downloads_ww",
+        ]
+    ]
+    print(df)
+    df_new = df_new[
+        [
+            "name",
+            "divice",
+            "region",
+            "category_id",
+            "unified_publisher_name",
+            "date",
+            "category",
+            "downloads_absolute",
+            "downloads_growth",
+            "downloads_growth_percent",
+            "revenue_absolute",
+            "revenue_growth",
+            "revenue_growth_percent",
+            "average_dau_absolute",
+            "average_dau_growth",
+            "average_dau_growth_percent",
+            "most_popular_country_by_downloads",
+            "organic_downloads_percent_last_q_ww",
+            "paid_downloads_percent_last_q_ww",
+        ]
+    ]
+    print(df_new)
+    # ALTER TABLE `sensor_tower` ADD COLUMN divice varchar(255) default null
+
+    # Insert data into the table
     try:
-        sftp.chdir(remote_dir)
-    except IOError:
-        dirs = remote_dir.split("/")
-        path = ""
-        for dir in dirs:
-            path = f"{path}/{dir}"
-            try:
-                sftp.chdir(path)
-            except IOError:
-                sftp.mkdir(path)
-                sftp.chdir(path)
+        df.to_sql("sensor_tower_overall", con=engine, if_exists="append", index=False)
+        print("Data inserted successfully.")
+    except Exception as e:
+        print("Error while inserting data:", e)
+
+    # Insert data into the table
+    try:
+        df_new.to_sql("sensor_tower_daily", con=engine, if_exists="append", index=False)
+        print("Data inserted successfully.")
+    except Exception as e:
+        print("Error while inserting data:", e)
 
 
-# for localhost
-def ensure_remote_dir(local_dir):
-    """Ensure the directory exists on the local server (no SFTP needed)."""
-    os.makedirs(
-        local_dir, exist_ok=True
-    )  # Recursively create directories if they don't exist
+def download_apps_data(
+    category_id=0,
+    start_date="2025-03-04",
+    end_date="2025-03-04",
+    devices=["iphone", "ipad", "android"],
+    regions=["US"],
+):
+    # API endpoint
+    url = "https://app.sensortower.com/api/unified/top_apps/with_facets.csv"
 
-
-def insert_featured_image(cursor, data, post_id, post_title, post_name):
-    # downnload image
-    address = ""
-    city = ""
-    if data["address"] != "":
-        address_arr = data["address"].split(",")
-        address = address_arr[0].strip()
-        city = address_arr[1].strip()
-
-    cuisine = (
-        data.get("category_cuisine_google", "")
-        .replace("restaurant", "")
-        .replace("restaurants", "")
-        .replace("Restaurant", "")
-        .replace("Restaurants", "")
-        .strip()
-    )
-    post_title = (
-        post_title
-        + " restaurant "
-        + address
-        + " "
-        + city
-        + " latest menu "
-        + cuisine
-        + " "
-        + current_date.strftime("%Y")
-    )
-    if cuisine != "":
-        post_content = (
-            post_title
-            + " restaurant is in Austin Texas having a menu primarily catering to "
-            + cuisine
-            + " as the primary cuisine"
-        )
-        img_alt_text = post_title + " having " + cuisine + " food menu"
-    else:
-        post_content = post_title + " restaurant is in Austin Texas"
-        img_alt_text = post_title + "having food menu"
-
-    post_excerpt = (
-        post_title
-        + " restaurant ambience in "
-        + city
-        + " Texas having a menu primarily catering to "
-        + cuisine
-        + " | Source : Google"
-    )
-    post_name = slugify(
-        post_title.replace("-", "")
-        .replace(".", "")
-        .replace(",", "")
-        .replace(";", "")
-        .replace(":", "")
-    )
-
-    guid = (
-        "https://top-menus.com/wp-content/uploads/"
-        + current_date.strftime("%Y")
-        + "/"
-        + current_date.strftime("%m")
-        + "/"
-    )
-
-    min_size = (200, 200)
-    if data["img_url"] is not None:
-        img_url = data["img_url"]
-        base_url = img_url.split("=")[0]
-        # Append the new parameters
-        modified_url = base_url + "=s1360-w1360-h1020"
-
-        response = requests.get(modified_url.strip(), verify=False)
-        if response.status_code == 200:
-            img = Image.open(BytesIO(response.content))
-
-            # Check if the image meets the minimum size requirements
-            if img.size[0] < min_size[0] or img.size[1] < min_size[1]:
-                img = img.resize(min_size, Image.ANTIALIAS)
-            # logger.info(msg=f"image - {img.size[0]} - {img.size[1]}")
-            mime_type = __get_image_extension(
-                magic.from_buffer(response.content, mime=True)
-            )
-
-            filename = f"{str(post_name)}.{mime_type}"
-            fileSizes = ["600x540", "560x370", "768x576", "175x175", "1024x768", ""]
-
-            # ensure_remote_dir(sftp, contabo_remote_path)
-            # # for localhost
-            ensure_remote_dir(contabo_remote_path)
-
-            # Define the remote file path
-            db_file_path = ""
-            for fs in fileSizes:
-
-                if fs != "":
-                    remote_file_path = (
-                        contabo_remote_path + f"{str(post_name)}-{fs}.{mime_type}"
-                    )
-
-                else:
-                    remote_file_path = (
-                        contabo_remote_path + f"{str(post_name)}.{mime_type}"
-                    )
-                db_file_path = remote_file_path.replace(
-                    "/var/www/html/wp-content/uploads/", ""
-                )
-                local_file_path = remote_file_path.replace(contabo_remote_path, "")
-
-                # Save the image content to a temporary file
-                local_temp_file = "featured_images/" + local_file_path
-                os.makedirs(os.path.dirname(local_temp_file), exist_ok=True)
-                img.save(local_temp_file)
-
-                # Upload the temporary file to the remote server
-                # sftp.put(local_temp_file, remote_file_path)
-                # # For localhost
-                shutil.copy(local_temp_file, remote_file_path)
-
-            guid = guid + filename
-            post_date = current_date.strftime("%Y-%m-%d %H:%M:%S")
-            insert_sql = "insert into wp_posts (post_author,post_date,post_date_gmt,post_content, post_title, post_excerpt, post_status, post_name, post_modified, post_modified_gmt, post_parent, guid, post_type, post_mime_type, to_ping, pinged, post_content_filtered) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s, %s, %s, %s, '', '', '')"
-            res = cursor.execute(
-                insert_sql,
-                (
-                    22,
-                    post_date,
-                    post_date,
-                    post_content,
-                    post_title,
-                    post_excerpt,
-                    "inherit",
-                    post_name,
-                    post_date,
-                    post_date,
-                    post_id,
-                    guid,
-                    "attachment",
-                    "image/jpeg",
-                ),
-            )
-            last_insert_id = cursor.lastrowid
-
-            meta_object = {}
-            meta_object["_wp_attached_file"] = db_file_path
-            meta_object["_wp_attachment_image_alt"] = img_alt_text
-
-            meta_data = ""
-            size = os.path.getsize(local_temp_file)
-            meta_data += 'a:6:{s:5:"width";'
-            meta_data += f'i:{img.size[0]};s:6:"height";i:{img.size[1]};s:4:"file";'
-            meta_data += f's:{len(db_file_path)}:"{db_file_path}";'
-            meta_data += f's:8:"filesize";i:{size};s:5:"sizes";'
-            meta_data += "a:6:{"
-            sizes = {
-                "medium": "600x540",
-                "large": "1024x768",
-                "thumbnail": "175x175",
-                "medium_large": "768x576",
-                "post-thumbnail": "560x370",
-                "lestin_medium": "600x540",
-            }
-            for index, value in sizes.items():
-                meta_data += f's:{len(index)}:"{index}";'
-                meta_data += 'a:5:{s:4:"file";'
-                resolutions = value.split("x")
-                sz = f"{post_name}-{value}.{mime_type}"
-                meta_data += f's:{len(sz)}:"{sz}";'
-                meta_data += (
-                    f's:5:"width";i:{resolutions[0]};s:6:"height";i:{resolutions[1]};'
-                )
-                # meta_data += f's:{len(sz)}:"{sz}";'
-                meta_data += (
-                    f's:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:{size};'
-                )
-                meta_data += "}"
-
-            meta_data += '}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}'
-            meta_object["_wp_attachment_metadata"] = meta_data
-
-            for index, value in meta_object.items():
-                try:
-                    sql2 = """insert into wp_postmeta (post_id,meta_key,meta_value) values(%s, %s, %s)"""
-                    cursor.execute(sql2, (last_insert_id, index, value))
-                except:
-                    logger.debug(msg="Error in featured image meta data::")
-
-            sql2 = """insert into wp_postmeta (post_id,meta_key,meta_value) values(%s, %s, %s)"""
-            cursor.execute(sql2, (post_id, "_thumbnail_id", last_insert_id))
-
-
-def __get_image_extension(mime_type):
-    valid_extensions = {
-        "image/bmp": "bmp",
-        "image/gif": "gif",
-        "image/jpeg": "jpg",
-        "image/png": "png",
-        "image/webp": "webp",
-        "image/svg+xml": "svg",
-        "image/tiff": "tiff",
-        "image/x-icon": "ico",
-        "image/vnd.microsoft.icon": "ico",
-        "image/vnd.wap.wbmp": "wbmp",
-        "image/heic": "heic",
-        "image/heif": "heif",
-        "image/heif-sequence": "heif",
-        "image/jp2": "jp2",
-        "image/jxr": "jxr",
-        "image/avif": "avif",
+    # Headers for the request
+    headers = {
+        "accept": "*/*",
+        "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+        "content-type": "application/json",
+        "origin": "https://app.sensortower.com",
+        "referer": "https://app.sensortower.com/",
+        "sec-ch-ua": '"Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": '"macOS"',
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-origin",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        "x-csrf-token": "djdZhXC2q9J2z6psaTzimthHu078wdi/N0YUXYqJpAmvdmbyaKbPjqvHpR1Wkk9F7TFYTKci0PxFny1V3N1e3g==",
     }
-    extension = valid_extensions.get(mime_type)
-    if extension is None:
-        return "png"
-    return extension
 
-
-def generate_content(d, post_title):
-    loc_code = (
-        f" ({d['basic_info'].get('city', '')}, {d['basic_info'].get('state_postal_abb', '')}) "
-        if "basic_info" in d
-        else " "
-    )
-
-    content = ""
-    content += "<h1>{}{}Menu:</h1>".format(d["name"].replace("'", ""), loc_code)
-    content += '<div class="menu_div">'
-    content += '<table dir="ltr" cellspacing="0" cellpadding="0"><colgroup><col width="815" /><col width="100" /></colgroup><tbody>'
-
-    grouped_menu = defaultdict(list)
-    menu_name = menu_desc = menu_price = menu_type = ""
-    for dt in d["gpt-o_cleansed"]:
-        if isinstance(dt, list):
-            continue
-        if dt.get("Type") and dt.get("Type", "").strip() != "":
-            type = dt["Type"]
-            grouped_menu[type].append(dt)
-        else:
-            grouped_menu["More Food, Beverages & Desserts"].append(dt)
-
-    for type, items in grouped_menu.items():
-        if type != "More Food, Beverages & Desserts":
-            content += '<tr class="rest_item">'
-            type = type.replace("'", "").strip()
-            content += f"<td><h5>{type}</h5></td>"
-            for item in items:
-                content += '<tr class="rest_name">'
-                name = item["Name"].strip().replace("'", "") if item.get("Name") else ""
-                content += f"<td><strong>{name}</strong></td>"
-                price = (
-                    item["Price"].replace("'", "").strip() if item.get("Price") else ""
-                )
-                content += f"<td>{price}</td>"
-                content += '</tr><tr class="rest_desc">'
-                if item.get("Desc") and item["Desc"].strip() != "":
-                    desc = (
-                        item["Desc"].strip().replace("'", "")
-                        if item.get("Desc")
-                        else ""
-                    )
-                    content += '<tr class="rest_desc">'
-                    content += f"<td>{desc}</td>"
-                    content += "<td></td></tr>"
-            content += "</tr>"
-
-    if (
-        "More Food, Beverages & Desserts" in grouped_menu
-        and len(grouped_menu["More Food, Beverages & Desserts"]) > 0
-    ):
-        content += '<tr class="rest_item">'
-        content += f"<td><h5>More Food, Beverages & Desserts</h5></td>"
-        for item in grouped_menu["More Food, Beverages & Desserts"]:
-            content += '<tr class="rest_name">'
-            name = (
-                item.get("Name", "").strip().replace("'", "")
-                if item.get("Name")
-                else ""
-            )
-            content += f"<td><strong>{name}</strong></td>"
-            price = (
-                item.get("Price").replace("'", "").strip() if item.get("Price") else ""
-            )
-            content += f"<td>{price}</td>"
-            if item.get("Desc") and item.get("Desc", "").strip() != "":
-                content += '<tr class="rest_desc">'
-                desc = item["Desc"].strip().replace("'", "")
-                content += f"<td>{desc}</td>"
-                content += "<td></td></tr>"
-        content += "</tr>"
-
-    content += "</tbody></table>"
-    content += "</div>"
-    content += '<div class="rest_div"></div>'
-    content += f'<h6>{post_title} restaurant menu is provided by <a href="https://www.allmenus.com/" target="_blank" rel="noopener">top-menus.com</a>.</h6>DISCLAIMER: Information shown may not reflect recent changes. Check with this restaurant for current pricing and menu information. A listing on top-menus.com does not necessarily reflect our affiliation with or endorsement of the listed restaurant, or the listed restaurant’s endorsement of top-menus.com. Please tell us by <a href="https://top-menus.com/contact/" target="_blank" rel="noopener">clicking here</a> if you know that any of the information shown is incorrect. For more information, please read our <a href="https://top-menus.com/terms-and-conditions/" target="_blank" rel="noopener">Terms and Conditions</a>.'
-    return content
-
-
-def generate_business_hours(opening_hours_):
-    opening_hours = {
-        re.sub(r"\s*\(.*\)", "", day.strip()): time
-        for day, time in opening_hours_.items()
+    # Cookies for the request
+    cookies = {
+        "locale": "en",
+        "osano_consentmanager_uuid": "239d131e-eb93-41a2-93e2-33d5f44257d9",
+        "osano_consentmanager": "IdU4AwPAomNQujOIFMObq2nvsWzv7atx0CFpglbAZGudVbusQ-Mp3s_hynkULvORiqrtsUs5Um-jy2BWvtNg8ESn9JERsSOol7PzXIKg3lh2CffClLKkUWOfkB9sllGnjQ05qGSvtUzxq8UjXOp-2X-CFf0mxJH95MokXMoaeAsYad3PKuOW2ATl266NV-7cCxHL14KX6IlmodNa9ktevdG7IsJdkcKxKXh1losstLW7cTCsY7oS46_xdNKeDAsN82lOoecb647Ipc92Txcu7dFEhbyHo1HFl58Y32Gne9MaLdN74a6qwLzx26aQxpuoEVQv7cmYmEw=",
+        "device_id": "ddd75a8d-1b0d-42eb-b92b-cbb80cab6860",
+        "sensor_tower_session": "51bfaaf3735d7549361e176b0b6a4e40",
+        "_ga": "GA1.1.229504196.1742547164",
+        # "_gcl_au": "1.1.1903697950.1742547838",
+        # "_mkto_trk": "id:351-RWH-315&token:_mch-sensortower.com-23c2cc20413da2cde5d11786bbc2ad45",
+        # "__adroll_fpc": "5057ca278e8938f95d4fbee0cf0d38da-1742547841128",
+        # "_zitok": "11cdadede2826239960e1742547842",
+        # "_ga_7P9W2ZETPG": "GS1.1.1742547839.1.1.1742549549.60.0.0",
+        # "__ar_v4": "KBVXVTIQHNCTJB23HUAR5J%3A20250320%3A2%7CG766IZETCNGLZN7VJ7M6MZ%3A20250320%3A2%7C7OF5EADQIBGZDM5P2PJSAH%3A20250320%3A2",
+        "NPS_028709fd_last_seen": "1742550412624",
+        "NPS_028709fd_throttle": "1742933363629",
+        "_ga_FDNER2EVFL": "GS1.1.1742890150.10.1.1742890169.0.0.0",
+        "AMP_6edb64137a": "JTdCJTIyZGV2aWNlSWQlMjIlM0ElMjI0YzNmZmY4Ny1kZTc2LTQ0ODgtOGVjNy01NjZlZDQ2MThjZGElMjIlMkMlMjJ1c2VySWQlMjIlM0ElMjJhbmt1c2gucmF3YXQlNDBjb2xsZWdlZHVuaWEuY29tJTIyJTJDJTIyc2Vzc2lvbklkJTIyJTNBMTc0Mjg4NjI1OTk4NCUyQyUyMm9wdE91dCUyMiUzQWZhbHNlJTJDJTIybGFzdEV2ZW50VGltZSUyMiUzQTE3NDI4OTEzNzgyMTklMkMlMjJsYXN0RXZlbnRJZCUyMiUzQTM0NiUyQyUyMnBhZ2VDb3VudGVyJTIyJTNBMCU3RA==",
     }
-    business_hours = "a:7:{"
-    for index, day in WEEK_DAYS_OPENING_HOURS.items():
-        business_hours += f's:3:"{index}";a:2:' + "{"
-        if opening_hours[day].lower() == "closed":
-            business_hours += f's:6:"option";s:9:"close_day";s:3:"hrs";a:1:' + "{"
-            business_hours += "i:0;a:2:{"
-            business_hours += f's:4:"from";s:5:"11:00";s:2:"to";s:5:"20:00";'
-        else:
-            business_hours += f's:6:"option";s:12:"custom_hours";s:3:"hrs";a:1:' + "{"
-            business_hours += "i:0;a:2:{"
-            if opening_hours[day].lower() == "open 24 hours":
-                open_time = close_time = "12:00"
-            else:
-                timing = opening_hours[day].split("to")
-                # open_time =
 
-                # if 'am' not in timing[0] and 'pm' not in timing[0] and ':' in timing[0]:
-                #     open_time = convert_to_24h(timing[0].strip() + ' pm', True)
-                # elif 'am' not in timing[0] and 'pm' not in timing[0] :
-                #     open_time = convert_to_24h(timing[0].strip() + ' pm')
-                # elif ':' in timing[0]:
-                #     open_time = convert_to_24h(timing[0].strip(), True)
-                # else:
-                #     open_time = convert_to_24h(timing[0].strip())
-
-                # if ':' in timing[1]:
-                #     close_time = convert_to_24h(timing[1].strip(), True)
-                # else:
-                #     close_time = convert_to_24h(timing[1].strip())
-            business_hours += f's:4:"from";s:5:"{timing[0].strip()}";s:2:"to";s:5:"{timing[1].strip()}";'
-        business_hours += "}}}"
-    business_hours += "}"
-    return business_hours
-
-
-def insert_post(cursor, d, post_title, post_name, content, business_hours):
-    ping_status = "closed"
-    post_type = "job_listing"
-    post_status = "publish"
-    post_date = current_date.strftime("%Y-%m-%d %H:%M:%S")
-    post_parent = 0
-    post_author = 22
-
-    insert_sql = """insert into wp_posts (post_author,post_date,post_date_gmt,post_content, post_title, post_status, ping_status, post_name, post_modified, post_modified_gmt, post_parent, post_type, post_excerpt, to_ping, pinged, post_content_filtered) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,'', '', '', '')"""
-    # print("before")
-    if isinstance(post_date, str):
-        post_date = datetime.strptime(post_date, "%Y-%m-%d %H:%M:%S")
-    if post_date.tzinfo is None:  # Make timezone-aware if missing
-        post_date = pytz.timezone("UTC").localize(post_date)
-
-    # print("postdata", post_date)
-    # print("Executing SQL:", cursor.mogrify(insert_sql, (post_author, post_date, post_date.astimezone(pytz.UTC), content, post_title, post_status, ping_status, post_name, post_date, post_date.astimezone(pytz.UTC), post_parent, post_type)))
-    # print("mid")
-    res = cursor.execute(
-        insert_sql,
-        (
-            post_author,
-            post_date,
-            post_date.astimezone(pytz.UTC),
-            content,
-            post_title,
-            post_status,
-            ping_status,
-            post_name,
-            post_date,
-            post_date,
-            post_parent,
-            post_type,
-        ),
-    )
-    # print("after")
-    last_insert_id = cursor.lastrowid
-    meta_object = {}
-    meta_object["_lt_address"] = d["address"]
-    meta_object["_lt_price_range"] = "inexpensive"
-    # meta_object['_lt_map'] = 'a:2:{s:3:"lat";s:10:"30.3460397";s:3:"lng";s:10:"59.2340242";}'
-    if "phone_no" in d and not (isinstance(d["phone_no"], float)):
-        meta_object["_lt_phone"] = d["phone_no"]
-    if "website" in d and not (isinstance(d["website"], float)):
-        meta_object["_lt_website"] = trim_url(d["website"])
-    meta_object["_lt_regions"] = 78
-    if business_hours != "":
-        meta_object["_lt_hours_value"] = business_hours
-    # meta_object['_job_expires'] = '2027-12-31'
-    meta_object["_lt_map_latitude"] = str(d["lat"]) if d.__contains__("lat") else ""
-    # meta_object['_lt_map_longitude'] = str(d['long']).replace('-', '') if d.__contains__('long') else ''
-    meta_object["_lt_map_longitude"] = str(d["long"]) if d.__contains__("long") else ""
-    map_object = ""
-    if d.__contains__("lat") and d.__contains__("long"):
-        lat = d["lat"]
-        # long = str(d['long']).replace('-', '')
-        long = str(d["long"])  # .replace('-', '')
-        # map_object += 'a:2:{s:3:"lat";'
-        # map_object += f's:10:"{lat}";'
-        # map_object += 's:3:"lng";'
-        # map_object += f's:10:"{long}";'
-        # map_object += '}'
-        php_serialized = phpserialize.dumps({"lat": lat, "lng": long})
-        map_object += php_serialized.decode("utf-8")
-    else:
-        map_object = "a:0:{}"
-    meta_object["_lt_map"] = map_object
-    meta_object["_lt_place_booking"] = (
-        'a:3:{s:4:"type";s:4:"info";s:9:"affiliate";a:4:{s:4:"link";s:0:"";s:4:"site";s:0:"";s:6:"link_2";s:0:"";s:6:"site_2";s:0:"";}s:6:"banner";a:1:{s:3:"url";s:0:"";}}'
-    )
-
-    rank_title, rank_description, focus_keyword, schema_descp, shortcode = (
-        generate_schema(d, post_title, post_name)
-    )
-
-    # post_title_fix = post_title.replace('&', '&amp;').replace('@', '&#64;').replace('#', '&#35;')
-    # rank_title = post_title_fix + " (Austin, TX) Latest Menu - " + current_date.strftime('%B %Y')
-    # cuisine = d['category_cuisine_google'].replace('restaurant', '').replace('restaurants', '').replace('Restaurant', '').replace('Restaurants', '').strip()
-    # rank_description = post_title_fix + " | " + d['address']
-    # if cuisine != '':
-    #     rank_description = rank_description + " | Cuisine: " + cuisine
-    # else:
-    #     rank_description = rank_description + " | Cuisine: Restaurant"
-    # focus_keyword = f"{post_title},{post_title} menu,{post_title} Restaurant Menu,{post_title} menu austin,Best restaurants in austin,{post_title} Menu with prices,{post_title} near me,{post_title} austin,{post_title} kids menu,Top 10 restaurants in austin"
-    # if cuisine != '':
-    #     focus_keyword = f"{focus_keyword},{cuisine},{cuisine} near me,{cuisine} near me open now,Best {cuisine} near me"
-    # else:
-    #     focus_keyword = f"{focus_keyword},Restaurants,Restaurants near me,Restaurants near me open now,Best Restaurants near me"
-
-    # meta_object['rank_math_title'] = rank_title
-    # meta_object['rank_math_description'] = rank_description
-    # meta_object['rank_math_focus_keyword'] = focus_keyword
-
-    # random_code = random.choices(string.ascii_lowercase + string.digits, k=13)
-    # random_code = ''.join(random_code)
-    # shortcode = "rank_math_shortcode_schema_s-" + random_code
-    # schema_descp = ''
-
-    # schema_descp += 'a:12:{s:8:"metadata";a:5:{s:5:"title";s:10:"Restaurant";s:4:"type";s:8:"template";s:9:"shortcode";'
-    # schema_descp += f's:{len(random_code) + 2}:"s-{random_code}";s:9:"isPrimary";s:1:"1";s:23:"reviewLocationShortcode";s:24:"[rank_math_rich_snippet]";'
-    # schema_descp += '}'
-    # schema_descp += 's:5:"@type";s:10:"Restaurant";'
-    # schema_descp += f's:4:"name";s:{len(post_title_fix)}:"{post_title_fix}";'
-    # schema_descp += f's:11:"description";s:{len(rank_description)}:"{rank_description}";'
-    # telephone = ''
-    # if d['phone_no'] != '':
-    #     telephone = d['phone_no']
-
-    # 's:17:"5404 Menchaca Rd ";s:15:"addressLocality";s:6:"Austin";s:13:"addressRegion";s:5:"Texas";s:10:"postalCode";s:5:"78745";s:14:"addressCountry";s:3:"USA";}s:3:"geo";a:3:{s:5:"@type";s:14:"GeoCoordinates";s:8:"latitude";s:10:"30.3460397";s:9:"longitude";s:10:"59.2340242";}s:25:"openingHoursSpecification";a:0:{}s:13:"servesCuisine";a:0:{}s:7:"hasMenu";s:49:"https://top-menus.com/listings/austin-java-menu-2";s:5:"image";a:2:{s:5:"@type";s:11:"ImageObject";s:3:"url";s:16:"%post_thumbnail%";}}'
-    # schema_descp += f's:9:"telephone";s:{len(telephone)}:"{telephone}";'
-    # schema_descp += 's:10:"priceRange";s:1:"$";s:7:"address";a:6:{s:5:"@type";s:13:"PostalAddress";s:13:"streetAddress";'
-    # address = ''
-    # pin_code = ''
-    # city = ''
-    # if d['address'] != '':
-    #     address_arr = d['address'].split(',')
-    #     address = address_arr[0].strip()
-    #     city = address_arr[1].strip()
-    #     pin_code = address_arr[2].replace('TX', '').strip()
-
-    # lat = d['lat'] if d.__contains__('lat') else ''
-    # # long = d['long'].replace('-', '').strip()
-    # long = d['long'].replace('-', '') if d.__contains__('long') else ''
-    # 's:7:"hasMenu";s:49:"https://top-menus.com/listings/austin-java-menu-2";s:5:"image";a:2:{s:5:"@type";s:11:"ImageObject";s:3:"url";s:16:"%post_thumbnail%";}}'
-    # website_url = 'https://top-menus.com/listings/' + post_name
-    # schema_descp += f's:{len(address)}:"{address}";'
-    # schema_descp += f's:15:"addressLocality";s:{len(city)}:"{city}";'
-    # schema_descp += f's:13:"addressRegion";s:5:"Texas";'
-    # schema_descp += f's:10:"postalCode";s:{len(pin_code)}:"{pin_code}";'
-    # schema_descp += f's:14:"addressCountry";s:3:"USA";'
-    # schema_descp += '}s:3:"geo";a:3:{s:5:"@type";s:14:"GeoCoordinates";s:8:"latitude";'
-    # schema_descp += f's:{len(lat)}:"{lat}";s:9:"longitude";s:{len(long)}:"{long}";'
-    # schema_descp += '}s:25:"openingHoursSpecification";a:0:{}'
-    # schema_descp += 's:13:"servesCuisine";a:1:{i:0;'
-    # schema_descp += f's:{len(cuisine)}:"{cuisine}";'
-    # schema_descp += '}s:7:"hasMenu";'
-    # schema_descp += f's:{len(website_url)}:"{website_url}";'
-    # schema_descp += 's:5:"image";a:2:{s:5:"@type";s:11:"ImageObject";s:3:"url";s:16:"%post_thumbnail%";}}'
-    meta_object["rank_math_title"] = rank_title
-    meta_object["rank_math_description"] = rank_description
-    meta_object["rank_math_focus_keyword"] = focus_keyword
-    meta_object["rank_math_schema_Restaurant"] = schema_descp
-
-    meta_id = None
-    for index, value in meta_object.items():
-        try:
-            sql2 = """insert into wp_postmeta (post_id,meta_key,meta_value) values(%s, %s, %s)"""
-            cursor.execute(sql2, (last_insert_id, index, value))
-            if index == "rank_math_schema_Restaurant":
-                meta_id = cursor.lastrowid
-        except:
-            logger.debug(msg="Error in meta data::")
-
-    if meta_id is not None:
-        meta_sql = """insert into wp_postmeta (post_id,meta_key,meta_value) values(%s, %s, %s)"""
-        cursor.execute(meta_sql, (last_insert_id, shortcode, meta_id))
-
-    categories = []
-    if (
-        d.get("category_cuisine_google") is not None
-        and d.get("category_cuisine_google", "").lower() != "restaurant"
-        and d.get("category_cuisine_google").lower() != "restaurants"
-    ):
-        cat = (
-            d["category_cuisine_google"]
-            .replace("restaurant", "")
-            .replace("restaurants", "")
-            .replace("Restaurant", "")
-            .replace("Restaurants", "")
-            .strip()
-        )
-        categories.append(cat)
-
-    categories.append("Restaurants")
-    for cat in categories:
-        try:  # check if category already exists otherwise create a new and tag
-            cat_slug = slugify(cat)
-            insert_tag_category(
-                cursor, cat, cat_slug, last_insert_id, "job_listing_category"
-            )
-        except Exception as e:
-            logger.debug(msg=f"Error in inserting category - {e}")
-
-    if d.__contains__("amenties") and len(d["amenties"]) > 0:
-        for ament in d["amenties"]:
-            try:
-                ament_slug = slugify(ament)
-                insert_tag_category(
-                    cursor, ament, ament_slug, last_insert_id, "job_listing_amenity"
-                )
-            except Exception as e:
-                logger.debug(msg=f"Error in inserting amenities - {e}")
-
-    tags = {
-        "Food": "food",
-        "Home Delivery": "home-delivery",
-        "Restaurant": "restaurant",
+    # Payload (JSON body)
+    payload = {
+        "filters": {
+            "category": category_id,
+            "comparison_attribute": "absolute",
+            "start_date": start_date,
+            "time_range": "day",
+            "end_date": end_date,
+            "measure": "downloads",
+            "devices": devices,
+            "regions": regions,
+        },
+        "facets": [
+            {"measure": "downloads", "type": "absolute"},
+            {"type": "custom", "name": "Release Date (WW)"},
+            {"type": "custom", "name": "Earliest Release Date"},
+            {"type": "custom", "name": "Publisher Country"},
+            {"measure": "dau", "type": "absolute"},
+            {"type": "custom", "name": "Most Popular Country by Downloads"},
+            {"measure": "revenue", "type": "absolute"},
+            {"type": "custom", "name": "Organic Downloads % (Last Q, WW)"},
+            {"type": "custom", "name": "Paid Downloads % (Last Q, WW)"},
+            {"type": "custom", "name": "All Time Downloads (WW)"},
+        ],
+        "pagination": {"limit": 10000, "offset": 0},
+        "use_preview_data": False,
     }
-    for tag, tag_slug in tags.items():
-        try:
-            insert_tag_category(
-                cursor, tag, tag_slug, last_insert_id, "job_listing_tag"
-            )
-        except:
-            logger.exception(msg=f"Error in inserting tags")
 
-    return last_insert_id
+    # Make the request
+    response = requests.post(url, headers=headers, cookies=cookies, json=payload)
 
+    # Save the response as a CSV file
+    if response.status_code == 200:
+        file_path = "top_apps_custom_new_use_pr.csv"
+        with open(file_path, "wb") as file:
+            file.write(response.content)
 
-def update_meta(cursor, d, post_id):
-    meta_object = {}
-    meta_object["_lt_address"] = d["address"]
-    meta_object["_lt_price_range"] = "inexpensive"
-    if "phone_no" in d and not (isinstance(d["phone_no"], float)):
-        meta_object["_lt_phone"] = d["phone_no"]
-    if "website" in d and not (isinstance(d["website"], float)):
-        meta_object["_lt_website"] = trim_url(d["website"])
-    meta_object["_lt_regions"] = 78
-
-    meta_object["_lt_map_latitude"] = str(d["lat"]) if d.__contains__("lat") else ""
-    # meta_object['_lt_map_longitude'] = str(d['long']).replace('-', '') if d.__contains__('long') else ''
-    meta_object["_lt_map_longitude"] = str(d["long"]) if d.__contains__("long") else ""
-    map_object = ""
-    if d.__contains__("lat") and d.__contains__("long"):
-        lat = str(d["lat"])
-        long = str(d["long"])  # .replace('-', '')
-        php_serialized = phpserialize.dumps({"lat": lat, "lng": long})
-        map_object += php_serialized.decode("utf-8")
+        df = pd.read_csv(
+            file_path, encoding="utf-16", sep="\t"
+        )  # Assuming tab-separated values based on the content
+        # print(df.head())
+        insert_data(df, category_id, start_date, end_date, devices[0], regions[0])
+        os.remove(file_path)
+        print("CSV file downloaded successfully as 'top_apps_custom_new_use.csv'.")
     else:
-        map_object = "a:0:{}"
-    meta_object["_lt_map"] = map_object
-    meta_object["_lt_place_booking"] = (
-        'a:3:{s:4:"type";s:4:"info";s:9:"affiliate";a:4:{s:4:"link";s:0:"";s:4:"site";s:0:"";s:6:"link_2";s:0:"";s:6:"site_2";s:0:"";}s:6:"banner";a:1:{s:3:"url";s:0:"";}}'
-    )
-
-    meta_id = None
-    for index, value in meta_object.items():
-        try:
-            sql2 = """update wp_postmeta set meta_value = %s where post_id = %s and meta_key = %s"""
-            cursor.execute(sql2, (value, post_id, index))
-
-        except:
-            logger.debug(msg="Error in meta data::")
+        print(f"Failed to download data. HTTP Status Code: {response.status_code}")
+        print(f"Response: {response.text}")
+    time.sleep(4)
 
 
-def update_meta_data(cursor, post_id, post_title, post_name, data, business_hours):
-    rank_title, rank_description, focus_keyword, schema_descp, short_code = (
-        generate_schema(data, post_title, post_name)
-    )
-    meta_object = {}
-    meta_object["rank_math_title"] = rank_title
-    meta_object["rank_math_description"] = rank_description
-    meta_object["rank_math_focus_keyword"] = focus_keyword
-    meta_object["rank_math_schema_Restaurant"] = schema_descp
-    if business_hours != "":
-        meta_object["_lt_hours_value"] = business_hours
-    # map_object = ''
-    # map_object += 'a:2:{s:3:"lat";'
-    # map_object += f's:10:"{data['lat']}";'
-    # map_object += 's:3:"lng";'
-    # map_object += f's:10:"{data['long'].replace('-', '')}";'
-    # map_object += '}'
-    # meta_object['_lt_map'] = map_object
-    meta_object["_lt_place_booking"] = (
-        'a:3:{s:4:"type";s:4:"info";s:9:"affiliate";a:4:{s:4:"link";s:0:"";s:4:"site";s:0:"";s:6:"link_2";s:0:"";s:6:"site_2";s:0:"";}s:6:"banner";a:1:{s:3:"url";s:0:"";}}'
-    )
-    meta_object[short_code] = ""
-
-    meta_sql = "select * from wp_postmeta where post_id = '{}'".format(post_id)
-    cursor.execute(meta_sql)
-    response = cursor.fetchall()
-    for index, value in meta_object.items():
-        try:
-            sql2 = ""
-            if response.__contains__(index):
-                if "rank_math_shortcode_schema_s" in index:
-                    sql_short_code = (
-                        """update wp_postmeta where post_id = %s set meta_key = %s"""
-                    )
-                    cursor.execute(sql_short_code, (post_id, index))
-                else:
-                    sql2 = """update wp_postmeta where post_id = %s and meta_key = %s set meta_value = %s"""
-            else:
-                sql2 = """insert into wp_postmeta (post_id,meta_key,meta_value) values(%s, %s, %s)"""
-                # cursor.execute(sql2)
-            cursor.execute(sql2, (post_id, index, value))
-        except:
-            logger.exception(msg="Error in updating meta data::")
-
-
-def generate_schema(d, post_title, post_name):
-    city = f"{d['basic_info'].get('city', '')}" if "basic_info" in d else ""
-    state = f"{d['basic_info'].get('state', '')}" if "basic_info" in d else ""
-    loc_code = (
-        f" ({d['basic_info'].get('city', '')}, {d['basic_info'].get('state_postal_abb', '')}) "
-        if "basic_info" in d
-        else " "
-    )
-    post_title = post_title.replace("'", "")
-    post_title_fix = (
-        post_title.replace("&", "&amp;").replace("@", "&#64;").replace("#", "&#35;")
-    )
-    rank_title = (
-        post_title_fix + f"{loc_code} Latest Menu - " + current_date.strftime("%B %Y")
-    )
-    cuisine = (
-        d.get("category_cuisine_google", "")
-        .replace("restaurant", "")
-        .replace("restaurants", "")
-        .replace("Restaurant", "")
-        .replace("Restaurants", "")
-        .strip()
-    )
-    rank_description = post_title_fix + " | " + d["address"]
-    if cuisine != "":
-        rank_description = rank_description + " | Cuisine: " + cuisine
-    else:
-        rank_description = rank_description + " | Cuisine: Restaurant"
-    focus_keyword = f"{post_title},{post_title} menu,{post_title} Restaurant Menu,{post_title} menu {city},Best restaurants in {city},{post_title} Menu with prices,{post_title} near me,{post_title} {city},{post_title} kids menu,Top 10 restaurants in {city}"
-    if cuisine != "":
-        focus_keyword = f"{focus_keyword},{cuisine},{cuisine} near me,{cuisine} near me open now,Best {cuisine} near me"
-    else:
-        focus_keyword = f"{focus_keyword},Restaurants,Restaurants near me,Restaurants near me open now,Best Restaurants near me"
-
-    random_code = random.choices(string.ascii_lowercase + string.digits, k=13)
-    random_code = "".join(random_code)
-    shortcode = "rank_math_shortcode_schema_s-" + random_code
-    schema_descp = ""
-
-    schema_descp += 'a:12:{s:8:"metadata";a:5:{s:5:"title";s:10:"Restaurant";s:4:"type";s:8:"template";s:9:"shortcode";'
-    schema_descp += f's:{len(random_code) + 2}:"s-{random_code}";s:9:"isPrimary";s:1:"1";s:23:"reviewLocationShortcode";s:24:"[rank_math_rich_snippet]";'
-    schema_descp += "}"
-    schema_descp += 's:5:"@type";s:10:"Restaurant";'
-    schema_descp += f's:4:"name";s:{len(rank_title)}:"{rank_title}";'
-    schema_descp += (
-        f's:11:"description";s:{len(rank_description)}:"{rank_description}";'
-    )
-    telephone = ""
-    if d["phone_no"] != "" and not (isinstance(d["phone_no"], float)):
-        telephone = d["phone_no"]
-
-    's:17:"5404 Menchaca Rd ";s:15:"addressLocality";s:6:"Austin";s:13:"addressRegion";s:5:"Texas";s:10:"postalCode";s:5:"78745";s:14:"addressCountry";s:3:"USA";}s:3:"geo";a:3:{s:5:"@type";s:14:"GeoCoordinates";s:8:"latitude";s:10:"30.3460397";s:9:"longitude";s:10:"59.2340242";}s:25:"openingHoursSpecification";a:0:{}s:13:"servesCuisine";a:0:{}s:7:"hasMenu";s:49:"https://top-menus.com/listings/austin-java-menu-2";s:5:"image";a:2:{s:5:"@type";s:11:"ImageObject";s:3:"url";s:16:"%post_thumbnail%";}}'
-    schema_descp += f's:9:"telephone";s:{len(telephone)}:"{telephone}";'
-    schema_descp += 's:10:"priceRange";s:1:"$";s:7:"address";a:6:{s:5:"@type";s:13:"PostalAddress";s:13:"streetAddress";'
-    address = ""
-    pin_code = ""
-    city = ""
-    if d["address"] != "":
-        address_arr = d["address"].split(",")
-        address = address_arr[0].strip() if len(address_arr) > 0 else ""
-        city = address_arr[1].strip() if len(address_arr) > 1 else ""
-        pin_code = (
-            address_arr[2].replace("TX", "").strip() if len(address_arr) > 3 else ""
-        )
-
-    lat = d["lat"] if d.__contains__("lat") else ""
-    # long = d['long'].replace('-', '') if d.__contains__('long') else ''
-    long = str(d["long"]) if d.__contains__("long") else ""
-    's:7:"hasMenu";s:49:"https://top-menus.com/listings/austin-java-menu-2";s:5:"image";a:2:{s:5:"@type";s:11:"ImageObject";s:3:"url";s:16:"%post_thumbnail%";}}'
-    website_url = "https://top-menus.com/listings/" + post_name
-    schema_descp += f's:{len(address)}:"{address}";'
-    schema_descp += f's:15:"addressLocality";s:{len(city)}:"{city}";'
-    schema_descp += f's:13:"addressRegion";s:5:"Texas";'
-    schema_descp += f's:10:"postalCode";s:{len(pin_code)}:"{pin_code}";'
-    schema_descp += f's:14:"addressCountry";s:3:"USA";'
-    schema_descp += '}s:3:"geo";a:3:{s:5:"@type";s:14:"GeoCoordinates";s:8:"latitude";'
-    schema_descp += f's:{len(lat)}:"{lat}";s:9:"longitude";s:{len(long)}:"{long}";'
-    schema_descp += '}s:25:"openingHoursSpecification";a:0:{}'
-    schema_descp += 's:13:"servesCuisine";a:1:{i:0;'
-    schema_descp += f's:{len(cuisine)}:"{cuisine}";'
-    schema_descp += '}s:7:"hasMenu";'
-    schema_descp += f's:{len(website_url)}:"{website_url}";'
-    schema_descp += 's:5:"image";a:2:{s:5:"@type";s:11:"ImageObject";s:3:"url";s:16:"%post_thumbnail%";}}'
-
-    return rank_title, rank_description, focus_keyword, schema_descp, shortcode
-
-
-def insert_tag_category(cursor, cat_name, cat_slug, post_id, type):
-    cat_sql = """SELECT term_id, name, slug FROM wp_terms where slug = %s"""
-    cursor.execute(cat_sql, (cat_slug))
-    cat_db = cursor.fetchone()
-    if cat_db:
-        sql3 = """INSERT INTO wp_term_relationships (object_id,term_taxonomy_id) VALUES (%s, %s)"""
-        cursor.execute(sql3, (post_id, cat_db["term_id"]))
-    else:
-        insert_terms_sql = """
-        INSERT INTO wp_terms (name, slug, term_group)
-        VALUES (%s, %s, 0)
-        """
-        cursor.execute(insert_terms_sql, (cat_name, cat_slug))
-        term_id = cursor.lastrowid
-
-        # Insert into wp_term_taxonomy
-        insert_term_taxonomy_sql = """
-        INSERT INTO wp_term_taxonomy (term_id, taxonomy, description, parent, count)
-        VALUES (%s, %s, '', 0, 1)
-        """
-        cursor.execute(insert_term_taxonomy_sql, (term_id, type))
-
-        sql3 = """INSERT INTO wp_term_relationships (object_id,term_taxonomy_id) VALUES (%s, %s)"""
-        cursor.execute(sql3, (post_id, term_id))
-
-
-def string_to_hex(s):
-    s = str(s)
-    # print(type(s))
-    hash_object = hashlib.md5(s.encode())
-    hex_code = hash_object.hexdigest()[:6]
-    return hex_code
-
-
-def generate_unique_slug(_id, value):
-
-    unique_id = string_to_hex(_id)
-    base_slug = slugify(value)
-    unique_slug = f"{base_slug}-{unique_id}"
-    counter = 1
-
-    while unique_slug in slugSet:
-        unique_slug = f"{base_slug}-{counter}-{unique_id}"
-        counter += 1
-
-    slugSet.add(unique_slug)
-    return unique_slug
-
-
-def slugify(text, separator="-", language="en"):
-    # Normalize the text to decompose combined characters
-    text = unicodedata.normalize("NFKD", text)
-
-    # Convert all dashes/underscores into the separator
-    flip = "_" if separator == "-" else "-"
-    text = re.sub(r"[" + re.escape(flip) + "]+", separator, text)
-
-    # Replace @ with the word 'at'
-    text = text.replace("@", separator + "at" + separator)
-
-    # Replace & with the word 'and'
-    text = text.replace("&", separator + "and" + separator)
-
-    # Remove all characters that are not the separator, letters, numbers, or whitespace
-    text = re.sub(r"[^" + re.escape(separator) + r"\w\s]+", "", text.lower())
-
-    # Replace all separator characters and whitespace by a single separator
-    text = re.sub(r"[" + re.escape(separator) + r"\s]+", separator, text)
-
-    # Strip any leading/trailing separator
-    return text.strip(separator)
-
-
-def convert_to_24h(time_str, colon=False):
-    format_str = "%I:%M %p" if colon else "%I %p"
-    time_obj = datetime.strptime(time_str, format_str)
-    return time_obj.strftime("%H:%M")
-
-
-def trim_url(url):
-    """Trim the URL to remove everything after '?'."""
-    if not url:
-        return ""
-    parsed_url = urlparse(url)
-    return parsed_url.scheme + "://" + parsed_url.netloc + parsed_url.path
-
-
-def process(rd):
-
-    with concurrent.futures.ThreadPoolExecutor(30) as executor:
-        futures = {executor.submit(process_data, r) for r in rd}
-        concurrent.futures.wait(futures)
-
+import sys
+from datetime import datetime
 
 if __name__ == "__main__":
-    logger.info(f"--")
-    logger.info(f"Started at {datetime.now(tz=pytz.UTC).isoformat()}")
-    parser = argparse.ArgumentParser(
-        description="Wordpress Top Menus ( Its update works on menu data and will not update category or meta data)"
-    )
-    parser.add_argument(
-        "--name",
-        type=str,
-        default="",
-        help="Enter the restaurant name, separating each with a comma.",
-    )
-    parser.add_argument("--limit", type=str, default=0, help="Enter the limit")
+    start_date_input = None
+    end_date_input = None
+    if len(sys.argv) > 1:
+        start_date_input = sys.argv[1]
+    if len(sys.argv) > 2:
+        end_date_input = sys.argv[2]
+    # category_id = "10000"  # Replace with the desired category ID
+    start_date = "2025-03-09"  # Replace with the desired start date
+    current_date = datetime.strptime(start_date, "%Y-%m-%d")
+    start_date = current_date.strftime("%Y-%m-%d")
 
-    args = parser.parse_args()
-    # restaurant_names = args.name.split(',')
+    if start_date_input:
+        start_date = start_date_input
+    end_date = start_date
+    if end_date_input:
+        end_date = end_date_input
+    devices = ["android", "iphone", "ipad"]  # Replace with the desired devices
+    # regions = [
+    #     "US",
+    #     "GB",
+    #     "CA",
+    #     "AU",
+    #     "DE",
+    #     "FR",
+    #     "IT",
+    #     "JP",
+    #     "KR",
+    #     "MX",
+    #     "NL",
+    #     "PL",
+    #     "RU",
+    #     "TR",
+    #     "BR",
+    #     "IN",
+    #     "CN",
+    #     "ES",
+    #     "SE",
+    #     "FI",
+    #     "NO",
+    #     "DK",
+    #     "HK",
+    #     "SG",
+    #     "TW",
+    #     "TH",
+    #     "VN",
+    #     "ID",
+    #     "PH",
+    #     "PT",
+    #     "QA",
+    #     "RO",
+    #     "SA",
+    #     "RS",
+    #     "SK",
+    #     "SI",
+    #     "ZA",
+    #     "LK",
+    #     "CH",
+    #     "TN",
+    #     "UA",
+    #     "AE",
+    #     "UY",
+    #     "UZ",
+    #     "VE",
+    #     "VN",
+    #     # "PL",
+    #     # "SG",
+    #     # "ES",
+    #     # "SE",
+    #     # "TW",
+    #     # "TH",
+    #     # "TR",
+    # ]  # Replace with the desired regions
 
-    restaurant_names = []
-    limit = None
+    for device in devices:
+        for region in regions:
+            for category_id in category_payload:
+                cat_id = category_id.get("id")
+                res = is_already_downloaded(cat_id, start_date, device, region)
+                print(res, "././/./.../././//////")
+                if res:
+                    print(
+                        f"Data for category {cat_id}, device {device}, region {region} already downloaded. Skipping..."
+                    )
+                    continue
+                else:
+                    start_time = time.time()
+                    print(
+                        f"Downloading data for category {cat_id}, date {start_date} end date {end_date} , device {device}, region {region}..."
+                    )
+                    download_apps_data(
+                        category_id=cat_id,
+                        start_date=start_date,
+                        end_date=end_date,
+                        devices=[device],
+                        regions=[region],
+                    )
+                    end_time = time.time()
+                    elapsed_time = end_time - start_time
+                    print(
+                        f"Downloaded data for category {cat_id}, date {start_date} , device {device}, region {region} in {elapsed_time:.2f} seconds."
+                    )
+    # download_apps_data(category_id, start_date, devices, regions)
 
-    project = {
-        "name": 1,
-        "address": 1,
-        "phone_no": 1,
-        "website": 1,
-        "category_cuisine_google": 1,
-        "opening_hours": 1,
-        "gpt-o_cleansed": 1,
-        "img_url": 1,
-        "amenties": 1,
-        "lat": 1,
-        "long": 1,
-        "published": 1,
-        "published_at": 1,
-        "republished_at": 1,
-    }
-
-    if len(restaurant_names) > 0:
-        # data = db.data_publish.find({'name': {"$in" : restaurant_names}}, project )
-        data = db.ocr.find(
-            {"google_id": {"$in": restaurant_names}, "gpt-o_cleansed": {"$ne": []}},
-            project,
-        )
-    else:
-        last_cn = datetime.now(tz=pytz.UTC) - timedelta(days=2)
-        # last_cn = datetime.now(tz=pytz.UTC) - timedelta(hours=12)
-        # last_cn = last_cn.replace(hour=0, minute=0, second=0, microsecond=0)  # Fix to set time to midnight
-
-        data = (
-            ds_db.onemenus_ocr.find(
-                {
-                    "$and": [
-                        {
-                            "$or": [
-                                {
-                                    "$and": [
-                                        {"republished_at": {"$exists": True}},
-                                        {
-                                            "$expr": {
-                                                "$gt": [
-                                                    "$updated_on",
-                                                    "$republished_at",
-                                                ]
-                                            }
-                                        },
-                                    ]
-                                },
-                                {
-                                    "$and": [
-                                        {"republished_at": {"$exists": False}},
-                                        {
-                                            "$expr": {
-                                                "$gt": ["$updated_on", "$published_at"]
-                                            }
-                                        },
-                                    ]
-                                },
-                                {"published": {"$exists": False}},
-                            ]
-                        },
-                        {"extracted_dishes": {"$ne": []}},
-                        # {
-                        # '$or': [
-                        #     { 'created_on': { '$gte': last_cn } },
-                        #     { 'updated_on': { '$gte': last_cn } }
-                        # ]
-                        # }
-                    ]
-                },
-                project,
-            )
-            .sort([("created_on", -1)])
-            .limit(WORDPRESS_LIMIT)
-        )
-
-    datas = list(data)
-    print(datas)
-    logger.info(f"Total {len(datas)} found")
-    data1 = process_data(datas)
-    logger.info(f"--")
+# Avg DAU (Date wise)
+# Downlaods (Date wise)

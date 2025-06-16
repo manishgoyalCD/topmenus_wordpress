@@ -212,19 +212,20 @@ def process_data(data):
                 mysql_conn.commit()
                 mysql_conn.close()
 
-                update = {
+                update_doc = {
                     "published": True,
-                    "topmenus_slug": post_name,
                     "source": "topmenus",
                 }
+                if not update:
+                    update_doc["topmenus_slug"] = post_name
 
                 if d.get("published_at"):
-                    update["republished_at"] = datetime.now()
+                    update_doc["republished_at"] = datetime.now()
                 else:
-                    update["published_at"] = datetime.now()
+                    update_doc["published_at"] = datetime.now()
 
                 ds_db.onemenus_ocr.update_one(
-                    {"google_id": d["google_id"]}, {"$set": update}
+                    {"google_id": d["google_id"]}, {"$set": update_doc}
                 )
                 logger.info(
                     f"Published restaurant ------------------------------ {d['_id']} | {d['google_id']}"
@@ -319,7 +320,13 @@ def insert_featured_image(cursor, data, post_id, post_title, post_name):
         )
         img_alt_text = post_title + " having " + cuisine + " food menu"
     else:
-        post_content = post_title + " restaurant is in " + data.get("city", "") + " " + data.get("state", "")
+        post_content = (
+            post_title
+            + " restaurant is in "
+            + data.get("city", "")
+            + " "
+            + data.get("state", "")
+        )
         img_alt_text = post_title + "having food menu"
 
     post_excerpt = (
@@ -642,7 +649,7 @@ def insert_post(cursor, d, post_title, post_name, content, business_hours):
         meta_object["_lt_phone"] = d["phone_no"]
     if "website" in d and not (isinstance(d["website"], float)):
         meta_object["_lt_website"] = trim_url(d["website"])
-    meta_object["_lt_regions"] =  35
+    meta_object["_lt_regions"] = 35
     if business_hours != "":
         meta_object["_lt_hours_value"] = business_hours
     meta_object["_lt_map_latitude"] = str(d["lat"]) if d.__contains__("lat") else ""
@@ -743,7 +750,7 @@ def update_meta(cursor, d, post_id):
         meta_object["_lt_phone"] = d["phone_no"]
     if "website" in d and not (isinstance(d["website"], float)):
         meta_object["_lt_website"] = trim_url(d["website"])
-    meta_object["_lt_regions"] =  35
+    meta_object["_lt_regions"] = 35
 
     meta_object["_lt_map_latitude"] = str(d["lat"]) if d.__contains__("lat") else ""
     meta_object["_lt_map_longitude"] = str(d["long"]) if d.__contains__("long") else ""
